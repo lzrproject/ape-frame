@@ -1,5 +1,6 @@
 package com.paopao.user.filter;
 
+import com.paopao.user.utils.ThreadLocalUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
@@ -35,7 +36,7 @@ public class WebInterceptor implements HandlerInterceptor {
 //
 //        log.info("请求体：{}", body);
 
-
+        ThreadLocalUtil.setCurrentId(111L);
         return true;
     }
 }

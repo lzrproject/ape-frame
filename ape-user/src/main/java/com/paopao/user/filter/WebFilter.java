@@ -16,7 +16,7 @@ import java.util.Map;
  * @Date 2022/8/10 20:19
  * @Description 请求接口拦截测试（过滤器）
  */
-@Component
+//@Component
 public class WebFilter implements Filter {
 
     @Override

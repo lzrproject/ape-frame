@@ -1,6 +1,11 @@
 package com.paopao.user.controller;
 
 import com.paopao.user.entity.User;
+import com.paopao.user.entity.dto.UserDto;
+import com.paopao.user.entity.req.UserReq;
+import com.paopao.user.service.UserService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sun.nio.ch.Interruptible;
 
@@ -14,14 +19,14 @@ import sun.nio.ch.Interruptible;
 @RequestMapping("user")
 public class UserController {
 
-    @GetMapping("get")
-    public String test(@RequestParam String value){
-        System.out.println(value);
-        return "Hello World!";
-    }
+    @Autowired
+    private UserService userService;
 
-    @PostMapping("entity")
-    public void stringTest(@RequestBody User user){
-        System.out.println(user.getPassword());
+    @PostMapping
+    public Integer addUser(@RequestBody UserReq userReq) {
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(userReq,userDto);
+        int i = userService.addUser(userDto);
+        return i;
     }
 }
