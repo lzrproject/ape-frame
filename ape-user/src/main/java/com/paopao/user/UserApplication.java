@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @Date 2022/8/10 16:36
  * @Description
  */
-@SpringBootApplication(scanBasePackages = {"com.paopao.user"})
+@SpringBootApplication(scanBasePackages = {"com.paopao.user","com.paopao"})
 //@MapperScan(basePackages = "com.paopao.user.mapper")
 @EnableCaching
 public class UserApplication {

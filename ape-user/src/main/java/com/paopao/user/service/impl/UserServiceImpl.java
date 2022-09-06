@@ -1,5 +1,7 @@
 package com.paopao.user.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.paopao.user.entity.User;
 import com.paopao.user.entity.dto.UserDto;
 import com.paopao.user.entity.po.UserPo;
 import com.paopao.user.mapper.UserMapper;
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserPo> implements UserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -25,7 +27,9 @@ public class UserServiceImpl implements UserService {
         UserPo userPo = new UserPo();
         // 效率不高
         BeanUtils.copyProperties(userDto,userPo);
+        userPo.setCreateBy("我改了");
         int count = userMapper.insert(userPo);
+
         return count;
     }
 }

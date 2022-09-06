@@ -22,6 +22,7 @@ public class TestController {
     @GetMapping("get")
     public String test(@RequestParam String value){
         System.out.println(ThreadLocalUtil.getCurrentId());
+
         return "Hello World!";
     }
 

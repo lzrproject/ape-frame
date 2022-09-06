@@ -12,7 +12,31 @@ spring:
       min-idle: 20  #最小空闲
       max-active: 100
       max-wait: 60000
+      # StatViewServlet配置。（因为暴露的监控信息比较敏感，支持密码加密和访问ip限定）
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: 123456
+      #对配置已开启的 filters 即 stat(sql 监控)wall（防火墙）
+      filter:
+        stat:
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 2000
+        wall:
+          enabled: true
 
-#mybatis-plus:
+mybatis-plus:
 #  mapper-locations: classpath*:xml/**.xml
+  # 逻辑删除
+  global-config:
+    db-config:
+      logic-delete-field: delete_flag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+sql:
+  beauty:
+    show: true
 
