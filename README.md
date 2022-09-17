@@ -8,6 +8,9 @@
 
 - **ape-frame（parent模块）**
   - **ape-common（通用模块服务）**
+    - **ape-common-mybatisPlus（mybatisPlus公共模块服务）**
+    - **ape-common-web（请求、响应、异常工具模块服务）**
+    - 
   - **ape-user（用户模块服务）**
 
 ------
@@ -39,3 +42,10 @@
 3、全局异常捕获 
 
 4、mybatisplus提供的拦截器集成
+
+### day04
+
+1、使用easycode插件，自动生成crud接口
+
+2、 集成mapstruct映射器，通过set/get提高执行效率，减少实体之间转换的耦合度
+
