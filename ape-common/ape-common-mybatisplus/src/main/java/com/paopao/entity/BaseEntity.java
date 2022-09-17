@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * @Author 111
  * @Date 2022/9/6 11:28
- * @Description
+ * @Description 实体公共字段
  */
 @Data
 public class BaseEntity implements Serializable {

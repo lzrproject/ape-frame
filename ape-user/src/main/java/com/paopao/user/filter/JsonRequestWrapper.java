@@ -28,11 +28,8 @@ public class JsonRequestWrapper extends HttpServletRequestWrapper {
     }
 
     @Override
-
     public BufferedReader getReader() throws IOException {
-
         return new BufferedReader(new InputStreamReader(getInputStream()));
-
     }
 
     /**
@@ -40,7 +37,6 @@ public class JsonRequestWrapper extends HttpServletRequestWrapper {
      * @return
      * @throws IOException
      */
-
     @Override
     public ServletInputStream getInputStream() throws IOException {
 

@@ -3,7 +3,7 @@ package com.paopao.response;
 /**
  * @Author 111
  * @Date 2022/9/6 11:47
- * @Description
+ * @Description 统一响应状态码
  */
 public class ResultCode {
 

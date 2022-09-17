@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * @Author 111
  * @Date 2022/9/5 16:50
- * @Description
+ * @Description mybatis 计算sql请求时间 工具类
  */
 
 @Intercepts(value = {

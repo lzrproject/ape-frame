@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * @Author 111
  * @Date 2022/9/6 11:31
- * @Description
+ * @Description mybatisPlus 填充字段
  */
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {

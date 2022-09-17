@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * @Author 111
  * @Date 2022/9/6 11:52
- * @Description
+ * @Description 统一响应类
  */
 @Data
 @Builder

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 /**
  * @Author 111
  * @Date 2022/9/6 14:44
- * @Description
+ * @Description 全局异常处理类
  */
 @RestControllerAdvice
 public class ExceptionAdaptController {
