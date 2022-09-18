@@ -6,6 +6,8 @@ import com.paopao.response.Result;
 import com.paopao.user.entity.SysUser;
 import com.paopao.user.entity.req.SysUserReq;
 import com.paopao.user.service.SysUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("sysUser")
+@Api(tags = "用户controller")
 public class SysUserController {
     /**
      * 服务对象
@@ -55,6 +58,7 @@ public class SysUserController {
      * @return 新增结果
      */
     @PostMapping
+    @ApiOperation(value = "新增用户",notes = "用户数据")
     public Result<SysUser> add(@RequestBody SysUser sysUser) {
         return Result.success(this.sysUserService.insert(sysUser));
     }

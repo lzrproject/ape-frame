@@ -3,10 +3,9 @@ package com.paopao.user.service.impl;
 import com.paopao.request.PageResponse;
 import com.paopao.user.convert.SysUserConverter;
 import com.paopao.user.entity.SysUser;
-import com.paopao.user.dao.SysUserDao;
+import com.paopao.user.mapper.SysUserDao;
 import com.paopao.user.entity.req.SysUserReq;
 import com.paopao.user.service.SysUserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

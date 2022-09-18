@@ -28,13 +28,22 @@ spring:
           enabled: true
 
 mybatis-plus:
-#  mapper-locations: classpath*:xml/**.xml
+#  mapper-locations: classpath*:mapper/**.xml
   # 逻辑删除
   global-config:
     db-config:
       logic-delete-field: delete_flag
       logic-delete-value: 1
       logic-not-delete-value: 0
+swagger:
+  base-package: com.paopao.user
+  title: ape-frame
+  contact-name: 我是paopao
+  contact-url: 地址
+  email: paopao@163.com
+  version: 1.0
+  description: 从0到1 开箱即用脚手架
+
 
 sql:
   beauty:

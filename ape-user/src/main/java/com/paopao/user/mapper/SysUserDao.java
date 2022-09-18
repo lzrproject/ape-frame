@@ -1,4 +1,4 @@
-package com.paopao.user.dao;
+package com.paopao.user.mapper;
 
 import com.paopao.user.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,7 +11,7 @@ import java.util.List;
  * @author makejava
  * @since 2022-09-17 10:51:48
  */
-@Mapper
+//@Mapper
 public interface SysUserDao {
 
     /**

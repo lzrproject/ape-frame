@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @Description
  */
 @SpringBootApplication(scanBasePackages = {"com.paopao.user","com.paopao"})
-//@MapperScan(basePackages = "com.paopao.user.mapper")
+@MapperScan(basePackages = "com.paopao.user.mapper")
 @EnableCaching
 public class UserApplication {
 
