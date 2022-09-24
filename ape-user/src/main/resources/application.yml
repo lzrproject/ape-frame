@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/ape-frame?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
     username: root
-    password: root
+    password: root11
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 20
@@ -16,6 +16,7 @@ spring:
       max-active: 100
       max-wait: 60000
       # StatViewServlet配置。（因为暴露的监控信息比较敏感，支持密码加密和访问ip限定）
+      # stat-view-servlet:
       #对配置已开启的 filters 即 stat(sql 监控)wall（防火墙）
       filter:
         stat:
