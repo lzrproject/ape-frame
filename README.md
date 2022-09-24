@@ -2,6 +2,10 @@
 
 一个神秘的脚手架
 
+Druid监控地址：http://localhost:8080/druid/login.html
+
+Swagger文档地址：http://localhost:8080/swagger-ui.html
+
 ------
 
 ### 项目结构
@@ -10,7 +14,8 @@
   - **ape-common（通用模块服务）**
     - **ape-common-mybatisPlus（mybatisPlus公共模块服务）**
     - **ape-common-web（请求、响应、异常工具模块服务）**
-    - 
+    - **ape-common-swagger（接口文档模块服务）**
+    - **ape-common-redis（redis缓存模块服务）**
   - **ape-user（用户模块服务）**
 
 ------
@@ -49,3 +54,8 @@
 
 2、 集成mapstruct映射器，通过set/get提高执行效率，减少实体之间转换的耦合度
 
+### day05
+
+1、整合Redis缓存，解决序列化的问题。
+
+2、通过ApplicationContext，在项目启动时获取对应的bean对象，实现自动预热
