@@ -1,11 +1,14 @@
 server:
   port: 8080
+
 spring:
+  profiles:
+    active: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://118.25.242.174:3306/ape-frame?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/ape-frame?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
     username: root
-    password: yourpasswd
+    password: root
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 20
@@ -13,11 +16,6 @@ spring:
       max-active: 100
       max-wait: 60000
       # StatViewServlet配置。（因为暴露的监控信息比较敏感，支持密码加密和访问ip限定）
-      stat-view-servlet:
-        enabled: true
-        url-pattern: /druid/*
-        login-username: admin
-        login-password: 123456
       #对配置已开启的 filters 即 stat(sql 监控)wall（防火墙）
       filter:
         stat:
@@ -26,6 +24,18 @@ spring:
           slow-sql-millis: 2000
         wall:
           enabled: true
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    lettuce:
+      pool:
+        max-active: 20
+        max-idle: 8   # 空闲连接数
+        max-wait: -1
+        min-idle: 0
+
+
 
 mybatis-plus:
 #  mapper-locations: classpath*:mapper/**.xml
