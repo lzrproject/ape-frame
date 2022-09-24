@@ -5,6 +5,7 @@ import com.paopao.user.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("test")
 public class TestController {
+//    @Autowired
+//    private CacheManager cacheManager;
+
     @Autowired
-    private CacheManager cacheManager;
+    private RedisTemplate redisTemplate;
 
     @GetMapping("get")
     public String test(@RequestParam String value){
@@ -29,5 +33,10 @@ public class TestController {
     @PostMapping("entity")
     public void stringTest(@RequestBody User user){
         System.out.println(user.getPassword());
+    }
+
+    @GetMapping("redisTest")
+    public void redisTest(){
+        redisTemplate.opsForValue().set("name","paopao");
     }
 }

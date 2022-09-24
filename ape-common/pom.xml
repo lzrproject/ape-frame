@@ -15,6 +15,7 @@
         <module>ape-common-web</module>
         <module>ape-common-mybatisplus</module>
         <module>ape-common-swagger</module>
+        <module>ape-common-redis</module>
     </modules>
 
     <properties>
