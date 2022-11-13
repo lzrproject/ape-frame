@@ -21,7 +21,7 @@ import java.time.Duration;
 
 /**
  * @Author 111
- * @Date 2022/9/24 14:55
+ * @Date 2022/9/24
  * @Description Redis配置类
  */
 @Configuration
@@ -41,7 +41,7 @@ public class RedisConfig {
     /**
      * @Description: cache注解缓存配置（不推荐使用cache注解）
      * @Author: paoPao
-     * @Date: 2022/10/4 17:02
+     * @Date: 2022/10/4
      */
     @Bean
     public RedisCacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory){

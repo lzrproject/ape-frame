@@ -17,6 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class UserApplication {
 
     public static void main(String[] args) {
+        System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
         SpringApplication.run(UserApplication.class);
     }
 }

@@ -3,6 +3,7 @@ package com.paopao.user.controller;
 import com.paopao.user.entity.User;
 import com.paopao.user.utils.ThreadLocalUtil;
 import com.paopao.util.RedisShareLockUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("test")
+@Slf4j
 public class TestController {
 //    @Autowired
 //    private CacheManager cacheManager;
@@ -49,5 +51,15 @@ public class TestController {
         String requestId = "123214";
         boolean lockTest = redisShareLockUtil.lock("lockTest", requestId, 10000L);
         System.out.println(lockTest);
+    }
+
+    @GetMapping("testLog")
+    public void testLog() {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            log.info("这是第{}条日志",i);
+        }
+        long end = System.currentTimeMillis();
+        log.info("耗时{}",end-start);
     }
 }

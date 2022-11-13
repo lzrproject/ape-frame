@@ -14,6 +14,7 @@ import java.util.Date;
  * @Description 实体公共字段
  */
 @Data
+
 public class BaseEntity implements Serializable {
 
     @TableField(fill = FieldFill.INSERT)
