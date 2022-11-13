@@ -59,3 +59,23 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
 1、整合Redis缓存，解决序列化的问题。
 
 2、通过ApplicationContext，在项目启动时获取对应的bean对象，实现自动预热
+
+### day06
+
+1、封装一个分布式锁
+
+2、注解缓存的方式
+
+3、快捷注释设置
+
+### day07
+
+1、日志log4j集成，异步日志集成
+
+- 创建log4j-spring.xml文件
+- 在启动器上加上 `System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");`
+
+2、安装Maven-Helper插件，解决依赖冲突。
+
+
+
