@@ -29,6 +29,7 @@
         <fastjson.version>1.2.78</fastjson.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <disruptor.version>3.4.2</disruptor.version>
+        <freemarker.version>2.3.30</freemarker.version>
     </properties>
 
     <dependencyManagement>
@@ -54,6 +55,12 @@
                 <groupId>com.lmax</groupId>
                 <artifactId>disruptor</artifactId>
                 <version>${disruptor.version}</version>
+            </dependency>
+            <!-- word模板 -->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

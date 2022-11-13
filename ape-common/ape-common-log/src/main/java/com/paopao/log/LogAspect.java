@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Author: paoPao
  * @Date: 2022/11/13
- * @Description: 日志切面
+ * @Description: 日志切面,打印controller、service层入参
  */
 
 @Aspect
