@@ -77,5 +77,8 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
 
 2、安装Maven-Helper插件，解决依赖冲突。
 
+3、aop切面日志，打印controller、service层的入参日志。
 
+### day08
 
+1、freemaker实现自定义word格式文件导出。
