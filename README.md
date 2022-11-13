@@ -73,6 +73,7 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
 1、日志log4j集成，异步日志集成
 
 - 创建log4j-spring.xml文件
+- 配置文件加上 logging-config: classpath:log4j-spring.xml
 - 在启动器上加上 `System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");`
 
 2、安装Maven-Helper插件，解决依赖冲突。
