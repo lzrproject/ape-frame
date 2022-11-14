@@ -1,5 +1,6 @@
 package com.paopao.user.controller;
 
+import com.paopao.tool.freemarker.ExportWordUtil;
 import com.paopao.user.entity.User;
 import com.paopao.user.utils.ThreadLocalUtil;
 import com.paopao.util.RedisShareLockUtil;
@@ -9,6 +10,9 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author 111
@@ -62,4 +66,15 @@ public class TestController {
         long end = System.currentTimeMillis();
         log.info("耗时{}",end-start);
     }
+
+    @GetMapping("testExport")
+    public void testExport() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("name","张三");
+        map.put("age",21);
+        map.put("body","打篮球");
+        map.put("signName","王五");
+        ExportWordUtil.exportWord(map,"个人资料","aaa.ftl");
+    }
+
 }

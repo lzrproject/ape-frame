@@ -31,6 +31,7 @@
         <disruptor.version>3.4.2</disruptor.version>
         <freemarker.version>2.3.30</freemarker.version>
         <pinyin4j.version>2.5.0</pinyin4j.version>
+        <spire.doc.version>10.11.6</spire.doc.version>
     </properties>
 
     <dependencyManagement>
@@ -62,6 +63,11 @@
                 <groupId>org.freemarker</groupId>
                 <artifactId>freemarker</artifactId>
                 <version>${freemarker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>e-iceblue</groupId>
+                <artifactId>spire.doc</artifactId>
+                <version>${spire.doc.version}</version>
             </dependency>
             <!-- 拼音工具类 -->
             <dependency>
@@ -97,5 +103,11 @@
             </resource>
         </resources>
     </build>
-
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>com.e-iceblue</id>-->
+<!--            <name>e-iceblue</name>-->
+<!--            <url>https://repo.e-iceblue.com/nexus/content/groups/public/</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 </project>
