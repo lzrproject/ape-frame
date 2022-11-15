@@ -180,7 +180,7 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t xml:space="preserve">${name}</w:t>
+                                        <w:t xml:space="preserve">张三</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -212,7 +212,7 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t xml:space="preserve">${age}</w:t>
+                                        <w:t xml:space="preserve">21</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -244,7 +244,7 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t xml:space="preserve">${body}</w:t>
+                                        <w:t xml:space="preserve">打篮球</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -354,7 +354,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t xml:space="preserve">${signName}</w:t>
+                            <w:t xml:space="preserve">王五</w:t>
                         </w:r>
                         <w:bookmarkStart w:id="0" w:name="_GoBack"/>
                         <w:bookmarkEnd w:id="0"/>
