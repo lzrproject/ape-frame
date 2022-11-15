@@ -83,3 +83,5 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
 ### day08
 
 1、freemaker实现自定义word格式文件导出。
+
+2、word文档需要转xml格式内容，可以通过spice.doc依赖实现doc对xml的转换。
