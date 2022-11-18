@@ -3,6 +3,9 @@ package com.paopao.share.pojo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,6 +18,7 @@ import lombok.EqualsAndHashCode;
  * @since 2022-08-30
  */
 @Data
+@TableName(value = "t_user")
 @EqualsAndHashCode(callSuper = false)
 public class User implements Serializable {
 
@@ -25,7 +29,9 @@ public class User implements Serializable {
 
     private String username;
 
-    private String password;
+    private Date createTime;
+
+//    private String password;
 
 
 }
