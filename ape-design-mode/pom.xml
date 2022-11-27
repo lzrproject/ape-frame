@@ -9,16 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ape-common</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>ape-common-web</module>
-        <module>ape-common-mybatisplus</module>
-        <module>ape-common-swagger</module>
-        <module>ape-common-redis</module>
-        <module>ape-common-log</module>
-        <module>ape-common-tool</module>
-    </modules>
+    <artifactId>ape-design-mode</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -27,12 +18,19 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>com.paopao</groupId>
+            <artifactId>ape-common-tool</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <groupId>com.paopao</groupId>
+            <artifactId>ape-common-web</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.paopao</groupId>
+            <artifactId>ape-common-mybatisplus</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

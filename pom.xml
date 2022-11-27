@@ -12,6 +12,7 @@
     <modules>
         <module>ape-user</module>
         <module>ape-common</module>
+        <module>ape-design-mode</module>
     </modules>
 
     <parent>
