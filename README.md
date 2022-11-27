@@ -12,11 +12,14 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
 
 - **ape-frame（parent模块）**
   - **ape-common（通用模块服务）**
+    - **ape-common-log（切面日志模块服务）**
     - **ape-common-mybatisPlus（mybatisPlus公共模块服务）**
     - **ape-common-web（请求、响应、异常工具模块服务）**
     - **ape-common-swagger（接口文档模块服务）**
     - **ape-common-redis（redis缓存模块服务）**
+    - **ape-common-tool（公共工具类）**
   - **ape-user（用户模块服务）**
+  - **ape-share（测试模块服务）**
 
 ------
 
@@ -85,3 +88,5 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
 1、freemaker实现自定义word格式文件导出。
 
 2、word文档需要转xml格式内容，可以通过spice.doc依赖实现doc对xml的转换。
+
+3、ape-share 多线程生成mysql测试数据
