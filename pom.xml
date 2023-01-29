@@ -27,12 +27,13 @@
         <maven.plugin.version>3.10.1</maven.plugin.version>
         <maven.compile.source>1.8</maven.compile.source>
         <maven.compile.target>1.8</maven.compile.target>
-        <fastjson.version>1.2.78</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <disruptor.version>3.4.2</disruptor.version>
         <freemarker.version>2.3.30</freemarker.version>
         <pinyin4j.version>2.5.0</pinyin4j.version>
         <spire.doc.version>10.11.6</spire.doc.version>
+        <guava.version>29.0-jre</guava.version>
     </properties>
 
     <dependencyManagement>
@@ -75,6 +76,11 @@
                 <groupId>com.belerweb</groupId>
                 <artifactId>pinyin4j</artifactId>
                 <version>${pinyin4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
