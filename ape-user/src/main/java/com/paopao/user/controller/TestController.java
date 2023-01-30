@@ -87,9 +87,10 @@ public class TestController {
     public void localCacheTest() {
         List<Long> skuIdList = new ArrayList<>();
         String cachePrefix = "skuInfo.skuName";
-        cacheUtil.getResult(skuIdList, cachePrefix, SkuInfo.class, (list) -> {
+        Map<Long,SkuInfo> result = cacheUtil.getResult(skuIdList, cachePrefix, SkuInfo.class, (list) -> {
             return getSkuInfo();
         });
+        System.out.println(result);
     }
 
     public Map<Long,SkuInfo> getSkuInfo() {
