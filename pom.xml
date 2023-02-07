@@ -34,6 +34,7 @@
         <pinyin4j.version>2.5.0</pinyin4j.version>
         <spire.doc.version>10.11.6</spire.doc.version>
         <guava.version>29.0-jre</guava.version>
+        <http.client.version>5.2.1</http.client.version>
     </properties>
 
     <dependencyManagement>
@@ -82,6 +83,11 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents.client5</groupId>
+                <artifactId>httpclient5</artifactId>
+                <version>${http.client.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -110,11 +116,10 @@
             </resource>
         </resources>
     </build>
-    <repositories>
-        <repository>
-            <id>com.e-iceblue</id>
-            <name>e-iceblue</name>
-            <url>https://repo.e-iceblue.com/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>com.e-iceblue</id>-->
+<!--            <url>https://repo.e-iceblue.cn/repository/maven-public/</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 </project>
