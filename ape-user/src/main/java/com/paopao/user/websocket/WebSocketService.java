@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @Author paoPao
  * @Date 2023/1/31
- * @Description
+ * @Description webSocket申请连接服务
  */
 @Slf4j
 @Component

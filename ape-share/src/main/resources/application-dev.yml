@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    test1:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test1?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: 123456
+    test2:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test2?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: 123456
+    test3:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test3?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: 123456
+    hikari:
+      connection-timeout: 50000
+      connection-test-query: SELECT 1
