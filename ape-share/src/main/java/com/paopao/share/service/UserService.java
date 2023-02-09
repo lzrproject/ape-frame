@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-08-30
  */
 public interface UserService extends IService<User> {
-    int getCount();
+    Long getCount();
 }

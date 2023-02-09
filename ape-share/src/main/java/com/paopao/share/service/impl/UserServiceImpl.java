@@ -23,7 +23,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
 
     @Override
-    public int getCount() {
-        return userMapper.getCount();
+    public Long getCount() {
+        return userMapper.selectCount(null);
     }
 }
