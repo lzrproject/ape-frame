@@ -2,6 +2,14 @@
 
 一个神秘的脚手架
 
+轻量级快速开发框架，涵盖平时业务开发的常用场景，做到开箱即用。用户可根据自身情况选择组件来进行使用。采取组件化开发模式。
+
+比如用户需要redis，则选择redis组件，需要websocket，则引入websocket组件，用户自身不需要再开发什么，只需要按照组件规则进行使用即可。
+
+同时，有些经典的工具以及经典的设计模式代码，提供了大量实例参考，用户的业务场景一旦用到，就可以直接使用。
+
+项目整体采用maven结构开发，封装了大量的模块，彼此解耦。满足用户日常开发需要。
+
 Druid监控地址：http://localhost:8080/druid/login.html
 
 Swagger文档地址：http://localhost:8080/swagger-ui.html
@@ -93,4 +101,32 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
 
 ### day09
 
-1、
+1、模板模式、工厂模式、抽象工厂模式、策略模式实战
+
+2、工厂+策略模式实战
+
+### day10
+
+1、封装一个cacheUtil，函数式编程+泛型+guava本地缓存
+
+2、websocket集成+鉴权
+
+### day11
+
+1、maven的profile实现环境隔离
+
+2、springboot插件打包部署
+
+3、httpclient优化
+
+4、建造者、过滤器模式实战（过滤器内容有问题！）
+
+### day12
+
+1、集成springbootTest
+
+2、服务启动预热（ApplicationListener）
+
+3、controller入参时间格式转化
+
+4、xxl-job集成springboot

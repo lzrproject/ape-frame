@@ -85,5 +85,15 @@ public class SysUserController {
         return Result.success(this.sysUserService.deleteById(id));
     }
 
+    /**
+     * 日期转换测试方法
+     * 接收 yyyy-MM-dd HH:mm:ss
+     */
+    @PostMapping("dateTest")
+    public void dateTest(@RequestBody SysUser sysUser) {
+        //
+        System.out.println(sysUser);
+    }
+
 }
 

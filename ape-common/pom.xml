@@ -19,6 +19,7 @@
         <module>ape-common-log</module>
         <module>ape-common-tool</module>
         <module>ape-common-websocket</module>
+        <module>ape-common-test</module>
     </modules>
 
     <properties>
