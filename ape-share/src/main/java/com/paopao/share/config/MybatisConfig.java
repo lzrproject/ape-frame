@@ -1,5 +1,6 @@
 package com.paopao.share.config;
 
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.paopao.share.config.dynamicDataSourceConfig.DynamicDataSource;
 import com.paopao.share.config.dynamicDataSourceConfig.DatabaseType;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -49,7 +50,7 @@ public class MybatisConfig {
     public SqlSessionFactory sessionFactory(@Qualifier("test1DataSource") DataSource test1DataSource,
                                             @Qualifier("test2DataSource") DataSource test2DataSource,
                                             @Qualifier("test3DataSource") DataSource test3DataSource) throws Exception{
-        SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
+        MybatisSqlSessionFactoryBean sessionFactoryBean = new MybatisSqlSessionFactoryBean();
         //构造方法，解决动态数据源循环依赖问题。
         sessionFactoryBean.setDataSource(this.dataSource(test1DataSource,test2DataSource, test3DataSource));
         return sessionFactoryBean.getObject();
