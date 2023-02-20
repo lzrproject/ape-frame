@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: ape-sharging-sphere
+#========================基本配置
+  shardingsphere:
+    mode:
+      type: Memory  # 内存模式 可选配置：Memory、Standalone、Cluster
+    props:
+      sql-show: true # 是否打印sql
+      sql-simple: false # 打印简单的sql
+
+#========================数据源配置
+    datasource:
+      names: server-user,server-order0,server-order1
+      server-user: # 数据源名称
+        type: com.alibaba.druid.pool.DruidDataSource  # 数据源完整类名
+        driver-class-name: com.mysql.cj.jdbc.Driver  # 数据库驱动类名，以数据库连接池自身配置为准
+        url: jdbc:mysql://192.168.1.132:3301/db_user?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: 123456
+      server-order0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://192.168.1.132:3310/db_order?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: 123456
+      server-order1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://192.168.1.132:3311/db_order?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: 123456
+#========================标准分片表配置（数据节点配置） 水平分片
+    # 值由数据源名 + 表名组成，以小数点分隔。多个表以逗号分隔，支持 inline 表达式。
+    rules:
+      sharding:
+        tables:
+          t_user:
+            actual-data-nodes: server-user.t_user
+          t_order:
+            actual-data-nodes: server-order$->{0..1}.t_order$->{0..1}
+            database-strategy:
+              standard:
+                sharding-column: user_id  # 分片列名称
+                sharding-algorithm-name: alg_inline_userid  # 分片算法名称
+            table-strategy:
+              standard:
+                sharding-column:  order_no
+                sharding-algorithm-name: alg_hash_mod
+            key-generate-strategy:
+              column: id
+              key-generator-name: alg_snowflake
+        sharding-algorithms:
+          # 水平分库算法
+          alg_inline_userid:
+            type: INLINE  # 行表达式分片算法
+            props:
+              algorithm-expression: server-order$->{user_id % 2}
+          alg_mod:
+            type: MOD # 取模分片算法
+            props:
+              sharding-count: 2 # 分片算法属性配置
+          # 水平分表算法
+          alg_hash_mod:
+            type: HASH_MOD  # 哈希取模分片算法
+            props:
+              sharding-count: 2
+        # 分布式序列算法类型
+        key-generators:
+          alg_snowflake:
+            type: SNOWFLAKE
+
+
+
