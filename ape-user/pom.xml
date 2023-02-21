@@ -64,6 +64,11 @@
             <artifactId>ape-common-websocket</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.paopao</groupId>
+            <artifactId>ape-common-job</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>

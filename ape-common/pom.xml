@@ -20,6 +20,7 @@
         <module>ape-common-tool</module>
         <module>ape-common-websocket</module>
         <module>ape-common-test</module>
+        <module>ape-common-job</module>
     </modules>
 
     <properties>

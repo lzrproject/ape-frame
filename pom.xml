@@ -89,6 +89,12 @@
                 <artifactId>httpclient5</artifactId>
                 <version>${http.client.version}</version>
             </dependency>
+            <!-- xxl-job-core -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>2.3.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
