@@ -1,6 +1,7 @@
 package com.paopao.user.controller;
 
 import com.paopao.tool.freemarker.ExportWordUtil;
+import com.paopao.tool.timeout.TimeRecord;
 import com.paopao.user.entity.User;
 import com.paopao.user.utils.ThreadLocalUtil;
 import com.paopao.util.CacheUtil;
@@ -13,6 +14,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author 111
@@ -37,9 +39,14 @@ public class TestController {
     private CacheUtil cacheUtil;
 
     @GetMapping("get")
+    @TimeRecord
     public String test(@RequestParam String value) {
         System.out.println(ThreadLocalUtil.getCurrentId());
-
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "Hello World!";
     }
 
