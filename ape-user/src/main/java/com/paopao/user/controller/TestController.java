@@ -39,8 +39,7 @@ public class TestController {
     private CacheUtil cacheUtil;
 
     @GetMapping("get")
-    @TimeRecord
-    public String test(@RequestParam String value) {
+    public String test(@RequestParam(required = false) String value) {
         System.out.println(ThreadLocalUtil.getCurrentId());
         try {
             TimeUnit.SECONDS.sleep(3);
@@ -48,6 +47,25 @@ public class TestController {
             e.printStackTrace();
         }
         return "Hello World!";
+    }
+
+    /**
+     * 接口超时设置
+     *
+     * @param timeout 毫秒
+     * @return
+     */
+    @GetMapping("request")
+    public Map<String, Object> requestTime(@RequestParam Long timeout) {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", "200");
+        map.put("body", timeout);
+        return map;
     }
 
     @PostMapping("entity")
@@ -94,13 +112,13 @@ public class TestController {
     public void localCacheTest() {
         List<Long> skuIdList = new ArrayList<>();
         String cachePrefix = "skuInfo.skuName";
-        Map<Long,SkuInfo> result = cacheUtil.getResult(skuIdList, cachePrefix, SkuInfo.class, (list) -> {
+        Map<Long, SkuInfo> result = cacheUtil.getResult(skuIdList, cachePrefix, SkuInfo.class, (list) -> {
             return getSkuInfo();
         });
         System.out.println(result);
     }
 
-    public Map<Long,SkuInfo> getSkuInfo() {
+    public Map<Long, SkuInfo> getSkuInfo() {
         return Collections.emptyMap();
     }
 

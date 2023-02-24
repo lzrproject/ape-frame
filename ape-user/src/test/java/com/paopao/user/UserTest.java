@@ -1,5 +1,6 @@
 package com.paopao.user;
 
+import com.paopao.user.controller.TestController;
 import com.paopao.user.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,8 +20,19 @@ public class UserTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TestController testController;
+
     @Test
     public void test1() {
         System.out.println(userService.count());
+    }
+
+    /**
+     * 过期时间拦截
+     */
+    @Test
+    public void requestRecord() {
+        System.out.println(testController.test(""));
     }
 }

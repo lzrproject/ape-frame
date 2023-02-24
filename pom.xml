@@ -14,6 +14,7 @@
         <module>ape-common</module>
         <module>ape-design-mode</module>
         <module>ape-sharding-jdbc</module>
+        <module>ape-code-generator</module>
     </modules>
 
     <parent>

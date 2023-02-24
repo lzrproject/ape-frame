@@ -1,0 +1,10 @@
+server:
+  port: 9001
+
+# 实体服务路径
+entity:
+  home: D:/idea/IdeaProjects/company/jhmrdrSC
+  # 项目包路径
+  package: com.jhdl.mrdr.template
+  # 作者
+  author: lzr
