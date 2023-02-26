@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Slf4j
-@Component
+//@Component
 @ConditionalOnProperty(name = {"log.aspect.enable"}, havingValue = "true", matchIfMissing = false)
 public class LogAspect {
 

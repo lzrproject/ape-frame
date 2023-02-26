@@ -16,17 +16,27 @@ import java.nio.charset.Charset;
  * @Description:
  */
 public class RequestWrapper extends HttpServletRequestWrapper {
+    private final String content;
     private final byte[] body;
 
     public RequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
         //读取
-        body = HttpHelper.getBodyString(request).getBytes(Charset.forName("UTF-8"));
+        this.content = HttpHelper.getBodyString(request);
+        this.body = this.content.getBytes(Charset.forName("UTF-8"));
     }
 
     @Override
     public BufferedReader getReader() throws IOException {
         return new BufferedReader(new InputStreamReader(getInputStream()));
+    }
+
+    public byte[] getRequestData() throws IOException {
+        return this.body;
+    }
+
+    public String getContent() throws IOException {
+        return this.content;
     }
 
     @Override

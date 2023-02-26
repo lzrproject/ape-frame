@@ -19,7 +19,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
     public ResponseWrapper(HttpServletResponse resp) throws IOException {
         super(resp);
         buffer = new ByteArrayOutputStream();// 真正存储数据的流
-        out = new WapperedOutputStream(buffer);
+        out = new WrapperOutputStream(buffer);
         writer = new PrintWriter(new OutputStreamWriter(buffer));
     }
 
@@ -59,10 +59,10 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
     }
 
 
-    private class WapperedOutputStream extends ServletOutputStream {
+    private static class WrapperOutputStream extends ServletOutputStream {
         private ByteArrayOutputStream bos = null;
 
-        public WapperedOutputStream(ByteArrayOutputStream stream) throws IOException {
+        public WrapperOutputStream(ByteArrayOutputStream stream) throws IOException {
             bos = stream;
         }
 

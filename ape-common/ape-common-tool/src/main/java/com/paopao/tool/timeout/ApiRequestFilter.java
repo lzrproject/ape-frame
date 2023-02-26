@@ -20,10 +20,8 @@ import java.io.IOException;
 /**
  * @Author paoPao
  * @Date 2023/2/22
- * @Description: 过滤器记录请求耗时
+ * @Description: 过滤器记录请求耗时  2、过滤器形式记录请求时间。
  */
-//@Component
-//@Order(1)
 @Slf4j
 public class ApiRequestFilter implements Filter {
     @Override
@@ -33,24 +31,18 @@ public class ApiRequestFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        RequestWrapper requestWrapper = new RequestWrapper((HttpServletRequest) servletRequest);
         ResponseWrapper responseWrapper = new ResponseWrapper((HttpServletResponse) servletResponse);
-        filterChain.doFilter(servletRequest, responseWrapper);
-        String contentType = responseWrapper.getContentType();
-        byte[] content = responseWrapper.getResponseData();
-        String str="";
-        if (StringUtils.isNotBlank(contentType) && (contentType.contains(MediaType.APPLICATION_JSON_VALUE) || contentType.contains(MediaType.TEXT_HTML_VALUE))) {
-            str = new String(content);
-            str=str+"xiaoming";
-            System.out.println("filter:"+str);
-            HttpServletResponse response=(HttpServletResponse)servletResponse;
-//            writeResponse(response,200,str);
-        }
         long start = System.currentTimeMillis();
-//        log.info("接口['{}']开始计时,req:{}", request.getRequestURI(), request.getParameterMap());
-//        filterChain.doFilter(servletRequest, servletResponse);
+        String requestURI = requestWrapper.getRequestURI();
+        log.info("接口['{}']开始计时,req:{}", requestURI, requestWrapper.getContent());
+        filterChain.doFilter(requestWrapper, responseWrapper);
+        String responseContent = responseWrapper.getContent();
         long end = System.currentTimeMillis();
         long requestTime = end - start;
-//        log.info("{},response:{},costTime:{}", request.getRequestURI(), result, requestTime);
+        log.info("{},response:{},costTime:{}", requestURI, responseContent, requestTime);
+        //将数据重新写入返回数据流中
+        servletResponse.getOutputStream().write(responseWrapper.getResponseData());
     }
 
     @Override

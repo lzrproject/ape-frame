@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @Date 2023/2/10
  * @Description
  */
-@SpringBootTest(classes = UserApplication.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = UserApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 public class UserTest {
 
@@ -33,6 +33,6 @@ public class UserTest {
      */
     @Test
     public void requestRecord() {
-        System.out.println(testController.test(""));
+        System.out.println(testController.requestTime(200L));
     }
 }
