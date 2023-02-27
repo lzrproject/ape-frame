@@ -35,7 +35,7 @@ public class GeneratorUtil {
     @Value("${entity.author}")
     private String author;
 
-    public void create(String modelName, String tableName, String tablePrefix, String url, String driverClass, String username, String password) {
+    public void create(String modelName, String tablePrefix, String url, String driverClass, String username, String password, String... tableName) {
         log.info("modelName：{}，tableName：{}，url：{}，driverClass：{}", modelName, tableName, url, driverClass);
         if (StringUtils.isBlank(home)) {
             log.info("读取文件路径失败！");
@@ -66,7 +66,7 @@ public class GeneratorUtil {
         gc.setMapperName("%sMapper");// 去掉生成的Mapper文件前缀
         gc.setXmlName("%sMapper");
         gc.setServiceName("%sService");
-        gc.setServiceImplName("%sServiceImpl");
+        gc.setServiceImplName("%sService");
         gc.setControllerName("%sController");
         autoGenerator.setGlobalConfig(gc);
 
@@ -122,7 +122,7 @@ public class GeneratorUtil {
 //                return projectPath+ setParent+ "/controller/" + tableInfo.getControllerName() + StringPool.DOT_JAVA;
 //            }
 //        });
-//        fileOutConfigs.add(new FileOutConfig("/template/service.java.ftl") {
+//        fileOutConfigs.add(new FileOutConfig("/template/serviceImpl.java.ftl") {
 //            @Override
 //            public String outputFile(TableInfo tableInfo) {
 //                return projectPath+ setParent+ "/service/" + tableInfo.getServiceName() + StringPool.DOT_JAVA;
@@ -164,6 +164,7 @@ public class GeneratorUtil {
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setEntityLombokModel(true);//开启实体类Lombok注解
+
         strategy.setRestControllerStyle(true);//生成Rest风格controller
         strategy.setControllerMappingHyphenStyle(false);
         strategy.setEntityTableFieldAnnotationEnable(true); //生成@TableField

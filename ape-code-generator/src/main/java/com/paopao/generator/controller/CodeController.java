@@ -15,21 +15,21 @@ public class CodeController {
 
     @Autowired
     private GeneratorUtil generatorUtil;
-//
+
+    //
 //    @Value("${entity.home}")
 //    private String home;
 //
     @PostMapping("create")
-    public void create(@RequestBody Param param){
+    public void create(@RequestBody Param param) {
         String modelName = param.getModelName();
-        String tableName = param.getTableName();
+        String[] tableName = param.getTableName();
         String tablePrefix = param.getTablePrefix();
         String url = param.getUrl();
         String driverClass = param.getDriverClass();
         String username = param.getUsername();
         String password = param.getPassword();
-
-        generatorUtil.create(modelName,tableName,tablePrefix,url,driverClass,username,password);
+        generatorUtil.create(modelName, tablePrefix, url, driverClass, username, password, tableName);
     }
 //
 //    public static void main(String[] args) {

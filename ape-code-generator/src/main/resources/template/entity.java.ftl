@@ -22,8 +22,6 @@ import lombok.EqualsAndHashCode;
 @Accessors(chain = true)
     </#if>
 </#if>
-@AllArgsConstructor
-@NoArgsConstructor
 <#if table.convert>
 @TableName("${table.name}")
 </#if>
