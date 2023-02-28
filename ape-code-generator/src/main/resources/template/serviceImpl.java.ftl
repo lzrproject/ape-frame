@@ -1,18 +1,18 @@
 package ${package.Service};
 
+import com.jhdl.mrdr.handle.JhemrCdaStrategy;
 import ${package.Entity}.${entity};
+import com.jhdl.mrdr.entity.JhemrCdaEnum;
 import ${package.Mapper}.${table.mapperName};
 import ${superServiceImplClassPackage};
 import com.baomidou.dynamic.datasource.annotation.DS;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jhdl.mrdr.util.SplitUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -32,11 +32,14 @@ open class ${table.serviceName} : ${superServiceImplClass}<${table.mapperName}, 
 
 }
 <#else>
-public class ${table.serviceName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> {
+public class ${table.serviceName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements JhemrCdaStrategy<${entity}> {
 
-    @Autowired
-    private ${table.mapperName} ${table.mapperName?uncap_first};
+    @Override
+    public JhemrCdaEnum getCdaName() {
+        return JhemrCdaEnum.${table.name?upper_case};
+    }
 
+    @Override
     public ${entity} saveDataToEntity(Map<String, String> datas) throws ParseException {
         DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         ${entity} entityData = new ${entity}();
@@ -63,6 +66,4 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
     }
 
 }
-
-
 </#if>
