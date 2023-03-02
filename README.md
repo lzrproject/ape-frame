@@ -19,6 +19,7 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
 ### 项目结构
 
 - **ape-frame（parent模块）**
+  - **ape-code-generator（MP自定义代码生成服务）**
   - **ape-common（通用模块服务）**
     - **ape-common-log（切面日志模块服务）**
     - **ape-common-mybatisPlus（mybatisPlus公共模块服务）**
@@ -26,8 +27,14 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
     - **ape-common-swagger（接口文档模块服务）**
     - **ape-common-redis（redis缓存模块服务）**
     - **ape-common-tool（公共工具类）**
+    - **ape-common-job（xxl-job任务调度服务）**
+    - **ape-common-test（单元测试服务）**
+    - **ape-websocket（http通讯服务）**
   - **ape-user（用户模块服务）**
   - **ape-share（测试模块服务）**
+  - **ape-design-mode（设计模式demo服务）**
+  - **ape-sharding-jdbc（分库分表demo服务）**
+
 
 ------
 
@@ -140,3 +147,9 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
 3、sharding-jdbc分库分表实战。
 
 4、自定义线程池。
+
+5、future异步封装，可指定请求超时异常。
+
+### day14
+
+1、spring的event事件驱动（未实现）
