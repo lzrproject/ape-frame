@@ -45,6 +45,7 @@ public class ThreadPoolTest {
     public void testFuture() {
         List<FutureTask<String>> futureTaskList = new ArrayList<>();
         FutureTask<String> futureTask1 = new FutureTask<String>(() -> {
+            Thread.sleep(2000);
             return "经典";
         });
         FutureTask<String> futureTask2 = new FutureTask<String>(() -> {

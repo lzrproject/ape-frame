@@ -17,7 +17,8 @@ public class CompletableFutureUtils {
         try {
             return future.get(timeOut, timeUnit);
         } catch (Exception e) {
-            logger.error("CompletableFutureUtils.getResult.error:{}",e.getMessage());
+            logger.error("CompletableFutureUtils.getResult.error:{}", e.getMessage(), e);
+            ;
             return defaultValue;
         }
     }

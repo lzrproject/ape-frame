@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+
 /**
  * @Author paoPao
  * @Date 2023/2/10
@@ -33,6 +35,7 @@ public class UserTest {
      */
     @Test
     public void requestRecord() {
-        System.out.println(testController.requestTime(200L));
+        System.out.println(new HashMap<>().put("path", "aa"));
+//        System.out.println(testController.requestTime(200L));
     }
 }
