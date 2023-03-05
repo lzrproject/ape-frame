@@ -65,6 +65,7 @@ public class TestController {
         Map<String, Object> map = new HashMap<>();
         map.put("code", "200");
         map.put("body", timeout);
+        log.info("[TestController.request]：{}", map);
         return map;
     }
 
