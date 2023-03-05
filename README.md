@@ -153,3 +153,7 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
 ### day14
 
 1、spring的event事件驱动（未实现）
+
+2、Redis lua实现cas。
+
+3、实现链路追踪。
