@@ -68,6 +68,7 @@ public class GeneratorUtil {
         gc.setServiceName("%sService");
         gc.setServiceImplName("%sService");
         gc.setControllerName("%sController");
+        gc.setEntityName("%sDTO");
         autoGenerator.setGlobalConfig(gc);
 
         // 数据源配置

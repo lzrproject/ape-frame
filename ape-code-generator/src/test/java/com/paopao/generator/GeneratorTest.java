@@ -32,9 +32,7 @@ public class GeneratorTest {
         tableName.add("JHEMR_cda01");
         tableName.add("JHEMR_cda02");
         tableName.add("JHEMR_cda03");
-        tableName.add("JHEMR_cda08");
         tableName.add("JHEMR_cda09");
-        tableName.add("JHEMR_cda13");
         tableName.add("JHEMR_cda26");
         tableName.add("JHEMR_cda27");
         tableName.add("JHEMR_cda28");
@@ -42,7 +40,6 @@ public class GeneratorTest {
         tableName.add("JHEMR_cda30");
         tableName.add("JHEMR_cda31");
         tableName.add("JHEMR_cda32");
-        tableName.add("JHEMR_cda34");
         tableName.add("JHEMR_cda35");
         Param param = new Param();
         param.setModelName("jhmrdr");

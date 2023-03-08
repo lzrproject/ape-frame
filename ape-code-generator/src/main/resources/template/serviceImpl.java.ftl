@@ -40,29 +40,34 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
     }
 
     @Override
-    public ${entity} saveDataToEntity(Map<String, String> datas) throws ParseException {
-        DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        ${entity} entityData = new ${entity}();
-        <#list table.fields as field>
-        <#if field.name == "AGE_VALUE">
-        List<String> ageValue = SplitUtil.splitStr(datas.get("AGE_VALUE"));
-        entityData.setAgeValue(Integer.parseInt(ageValue.get(0)));
-        entityData.setAgeUnit(ageValue.get(1));
-        <#elseif field.propertyType == "Double">
-        entityData.set${field.capitalName}(Double.valueOf(datas.get("${field.name}")));
-        <#elseif field.propertyType == "Date">
-        if ("".equals(datas.get("${field.name}"))) {
-            entityData.set${field.capitalName}(null);
-        } else {
-            entityData.set${field.capitalName}(fmt.parse(datas.get("${field.name}")));
+    public void saveDataToEntity(List<Map<String, String>> datas) throws ParseException {
+        List<${entity}> entityDataList = new ArrayList<>();
+        for (int i = 0; i < datas.size(); i++) {
+            Map<String, String> data = datas.get(i);
+            DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            ${entity} entityData = new ${entity}();
+            <#list table.fields as field>
+            <#if field.name == "AGE_VALUE">
+            List<String> ageValue = SplitUtil.splitStr(data.get("AGE_VALUE"));
+            entityData.setAgeValue(Integer.parseInt(ageValue.get(0)));
+            entityData.setAgeUnit(ageValue.get(1));
+            <#elseif field.propertyType == "Double">
+            entityData.set${field.capitalName}(Double.valueOf(data.get("${field.name}")));
+            <#elseif field.propertyType == "Date">
+            if ("".equals(data.get("${field.name}"))) {
+                entityData.set${field.capitalName}(null);
+            } else {
+                entityData.set${field.capitalName}(fmt.parse(data.get("${field.name}")));
+            }
+            <#elseif field.propertyType == "Integer">
+            entityData.set${field.capitalName}(Integer.valueOf(data.get("${field.name}")));
+            <#else>
+            entityData.set${field.capitalName}(data.get("${field.name}"));
+            </#if>
+            </#list>
+            entityDataList.add(entityData);
         }
-        <#elseif field.propertyType == "Integer">
-        entityData.set${field.capitalName}(Integer.valueOf(datas.get("${field.name}")));
-        <#else>
-        entityData.set${field.capitalName}(datas.get("${field.name}"));
-        </#if>
-        </#list>
-        return entityData;
+        this.saveBatch(entityDataList, 1000);
     }
 
 }
