@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Author: paoPao
  * @Date: 2023/2/26
- * @Description:
+ * @Description: 线程池工具
  */
 @SpringBootTest(classes = UserApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)

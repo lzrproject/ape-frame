@@ -30,9 +30,11 @@ public class BatchReplaceUtil {
 
     private static Logger log = Logger.getLogger("com.test.typora");
     // 目标目录
-    private static String TARGET_DIR = "E:/idea/MyStudy/备份/文档";
+//    private static String TARGET_DIR = "E:/idea/MyStudy/备份/文档";
+    private static String TARGET_DIR = "D:/idea/备份/aa";
     // 新存储目录
-    private static String NEWEST_DIR = "E:/idea/MyStudy/备份";
+//    private static String NEWEST_DIR = "E:/idea/MyStudy/备份";
+    private static String NEWEST_DIR = "D:/idea/备份";
     // 替换内容
     private static String REPLACE_TO = "images/";
 

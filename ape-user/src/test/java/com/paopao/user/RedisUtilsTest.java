@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 /**
  * @Author: paoPao
  * @Date: 2023/3/5
- * @Description:
+ * @Description: redis测试类
  */
 @SpringBootTest(classes = UserApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
