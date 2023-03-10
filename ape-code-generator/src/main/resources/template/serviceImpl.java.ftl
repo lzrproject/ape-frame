@@ -1,8 +1,11 @@
 package ${package.Service};
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.NumberUtil;
+import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.jhdl.mrdr.handle.JhemrCdaStrategy;
-import ${package.Entity}.${entity};
 import com.jhdl.mrdr.entity.JhemrCdaEnum;
+import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${superServiceImplClassPackage};
 import com.baomidou.dynamic.datasource.annotation.DS;
@@ -40,6 +43,7 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
     }
 
     @Override
+    @DSTransactional
     public void saveDataToEntity(List<Map<String, String>> datas) throws ParseException {
         List<${entity}> entityDataList = new ArrayList<>();
         for (int i = 0; i < datas.size(); i++) {
@@ -52,15 +56,17 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
             entityData.setAgeValue(Integer.parseInt(ageValue.get(0)));
             entityData.setAgeUnit(ageValue.get(1));
             <#elseif field.propertyType == "Double">
-            entityData.set${field.capitalName}(Double.valueOf(data.get("${field.name}")));
+            if (NumberUtil.isDouble(data.get("${field.name}"))) {
+                entityData.set${field.capitalName}(Double.valueOf(data.get("${field.name}")));
+            }
             <#elseif field.propertyType == "Date">
-            if ("".equals(data.get("${field.name}"))) {
-                entityData.set${field.capitalName}(null);
-            } else {
-                entityData.set${field.capitalName}(fmt.parse(data.get("${field.name}")));
+            if (ObjectUtil.isNotEmpty(data.get("${field.name}"))) {
+                entityData.set${field.capitalName}(SplitUtil.stringToDate(data.get("${field.name}")));
             }
             <#elseif field.propertyType == "Integer">
-            entityData.set${field.capitalName}(Integer.valueOf(data.get("${field.name}")));
+            if (NumberUtil.isInteger(data.get("${field.name}"))) {
+                entityData.set${field.capitalName}(Integer.valueOf(data.get("${field.name}")));
+            }
             <#else>
             entityData.set${field.capitalName}(data.get("${field.name}"));
             </#if>

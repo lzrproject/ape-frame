@@ -61,8 +61,8 @@ public class GeneratorUtil {
 //        gc.setBaseResultMap(true);// XML ResultMap
 //        gc.setBaseColumnList(true);// XML columList
 //        gc.setSwagger2(true); //实体属性 Swagger2 注解
-        gc.setIdType(IdType.ID_WORKER);
-        gc.setDateType(DateType.ONLY_DATE); //注释的日期格式只显示时间
+//        gc.setIdType(IdType.ID_WORKER);
+//        gc.setDateType(DateType.ONLY_DATE); //注释的日期格式只显示时间
         gc.setMapperName("%sMapper");// 去掉生成的Mapper文件前缀
         gc.setXmlName("%sMapper");
         gc.setServiceName("%sService");
@@ -135,18 +135,18 @@ public class GeneratorUtil {
                 return projectPath + setParent.replaceAll("\\.","/") + "/service/" + tableInfo.getServiceImplName() + StringPool.DOT_JAVA;
             }
         });
-        fileOutConfigs.add(new FileOutConfig("/template/entity.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return projectPath + setParent.replaceAll("\\.","/") + "/entity/" + tableInfo.getEntityName() + StringPool.DOT_JAVA;
-            }
-        });
-        fileOutConfigs.add(new FileOutConfig("/template/mapper.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return projectPath + setParent.replaceAll("\\.","/") + "/mapper/" + tableInfo.getMapperName() + StringPool.DOT_JAVA;
-            }
-        });
+//        fileOutConfigs.add(new FileOutConfig("/template/entity.java.ftl") {
+//            @Override
+//            public String outputFile(TableInfo tableInfo) {
+//                return projectPath + setParent.replaceAll("\\.","/") + "/entity/" + tableInfo.getEntityName() + StringPool.DOT_JAVA;
+//            }
+//        });
+//        fileOutConfigs.add(new FileOutConfig("/template/mapper.java.ftl") {
+//            @Override
+//            public String outputFile(TableInfo tableInfo) {
+//                return projectPath + setParent.replaceAll("\\.","/") + "/mapper/" + tableInfo.getMapperName() + StringPool.DOT_JAVA;
+//            }
+//        });
 
         cfg.setFileOutConfigList(fileOutConfigs);
         autoGenerator.setCfg(cfg);
