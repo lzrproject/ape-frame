@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Author paoPao
  * @Date 2023/2/28
- * @Description:
+ * @Description: 任务超时日志
  */
 public class CompletableFutureUtils {
 

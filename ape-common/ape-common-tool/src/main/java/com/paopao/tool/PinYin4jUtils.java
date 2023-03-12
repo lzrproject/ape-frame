@@ -11,7 +11,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 /**
  * @Author paoPao
  * @Date 2022/11/14
- * @Description
+ * @Description: 汉字工具类
  */
 public class PinYin4jUtils {
 
