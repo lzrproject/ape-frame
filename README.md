@@ -157,3 +157,7 @@ Swagger文档地址：http://localhost:8080/swagger-ui.html
 2、Redis lua实现cas。
 
 3、实现链路追踪。
+
+4、关闭线程池工具类。
+
+5、动态配置.properties配置文件，例如nacos动态配置文件。依赖Spring
