@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -29,16 +30,33 @@ public class ThreadPoolTest {
 
     @Test
     public void threadPoolTest() {
+        CountDownLatch countDownLatch = new CountDownLatch(5);
         for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                mailThreadPool.submit(new Runnable() {
-                    @Override
-                    public void run() {
-                        log.info("当前时间：{}", System.currentTimeMillis());
-                    }
-                });
-            }
+            mailThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    test();
+                    countDownLatch.countDown();
+//                    log.info("当前时间：{}", System.currentTimeMillis());
+                }
+            });
         }
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void test() {
+        long start = System.currentTimeMillis();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        long end = System.currentTimeMillis();
+        log.info("{} test.costTime：{}", Thread.currentThread().getName(), end - start);
     }
 
     @Test
