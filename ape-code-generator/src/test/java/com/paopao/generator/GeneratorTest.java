@@ -40,9 +40,10 @@ public class GeneratorTest {
 //        tableName.add("JHEMR_cda30");
 //        tableName.add("JHEMR_cda31");
 //        tableName.add("JHEMR_cda32");
-        tableName.add("JHEMR_cda33");
+//        tableName.add("JHEMR_cda33");
 //        tableName.add("JHEMR_cda34");
 //        tableName.add("JHEMR_cda35");
+        tableName.add("JHEMR_cda39");
         Param param = new Param();
         param.setModelName("jhmrdr");
         param.setTableName(tableName.toArray(new String[]{}));

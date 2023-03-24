@@ -1,0 +1,66 @@
+package ${package.Entity};
+
+
+import java.io.Serializable;
+
+/**
+ * 描述
+ *
+ */
+public class Result<T> implements Serializable {
+    private boolean flag;//是否成功
+    private Integer errorCode;//返回码
+    private String errorMsg;//返回消息
+    private T data;//返回数据
+
+    public Result(boolean flag, Integer errorCode, String errorMsg, Object data) {
+        this.flag = flag;
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+        this.data = (T) data;
+    }
+
+    public Result(boolean flag, Integer errorCode, String errorMsg) {
+        this.flag = flag;
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+    }
+
+    public Result() {
+        this.flag = true;
+        this.errorCode = StatusCode.SUCCESS;
+        this.errorMsg = "操作成功!";
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    public Integer getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(Integer errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+}
