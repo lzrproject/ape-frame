@@ -1,6 +1,6 @@
 package com.paopao.user;
 
-import com.paopao.tool.CompletableFutureUtils;
+import com.paopao.tool.threadpool.CompletableFutureUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

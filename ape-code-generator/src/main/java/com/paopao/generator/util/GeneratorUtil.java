@@ -141,12 +141,12 @@ public class GeneratorUtil {
                 return projectPath + setParent.replaceAll("\\.","/") + "/entity/" + tableInfo.getEntityName() + StringPool.DOT_JAVA;
             }
         });
-//        fileOutConfigs.add(new FileOutConfig("/template/mapper.java.ftl") {
-//            @Override
-//            public String outputFile(TableInfo tableInfo) {
-//                return projectPath + setParent.replaceAll("\\.","/") + "/mapper/" + tableInfo.getMapperName() + StringPool.DOT_JAVA;
-//            }
-//        });
+        fileOutConfigs.add(new FileOutConfig("/template/mapper.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return projectPath + setParent.replaceAll("\\.","/") + "/mapper/" + tableInfo.getMapperName() + StringPool.DOT_JAVA;
+            }
+        });
 
         cfg.setFileOutConfigList(fileOutConfigs);
         autoGenerator.setCfg(cfg);
