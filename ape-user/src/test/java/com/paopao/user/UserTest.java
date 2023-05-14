@@ -2,6 +2,7 @@ package com.paopao.user;
 
 import com.paopao.tool.PropertiesUtils;
 import com.paopao.user.controller.TestController;
+import com.paopao.user.entity.SysUser;
 import com.paopao.user.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,4 +54,5 @@ public class UserTest {
     public void test() {
         System.out.println("B".charAt(0));
     }
+
 }

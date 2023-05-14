@@ -1,6 +1,7 @@
 package com.paopao.user;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -77,4 +78,8 @@ public class ExecutorTest {
 @Data
 class User {
     private String username;
+
+    public User(String username) {
+        this.username = username;
+    }
 }
