@@ -1,5 +1,6 @@
 package ${package.Service};
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.NumberUtil;
 import com.alibaba.fastjson.JSONObject;
@@ -48,26 +49,28 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
     @Transactional
     public void saveDataToEntity(List<Map<String, String>> datas) throws ParseException {
         List<${entity}> entityDataList = new ArrayList<>();
-        for (int i = 0; i < datas.size(); i++) {
-            Map<String, String> data = datas.get(i);
-            DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            ${entity} entityData = new ${entity}();
-            <#list table.fields as field>
-            <#if field.name == "AGE_VALUE">
-            List<String> ageValue = SplitUtil.splitStr(data.get("AGE_VALUE"));
-            entityData.setAgeValue(Integer.parseInt(ageValue.get(0)));
-            entityData.setAgeUnit(ageValue.get(1));
-            <#elseif field.propertyType == "Double">
-            entityData.set${field.capitalName}(SplitUtil.isDouble(data.get("${field.name}")));
-            <#elseif field.propertyType == "Date">
-            entityData.set${field.capitalName}(SplitUtil.stringToDate(data.get("${field.name}")));
-            <#elseif field.propertyType == "Integer">
-            entityData.set${field.capitalName}(SplitUtil.isInteger(data.get("${field.name}")));
-            <#else>
-            entityData.set${field.capitalName}(data.get("${field.name}"));
-            </#if>
-            </#list>
-            entityDataList.add(entityData);
+        for (Map<String, String> data : datas) {
+            try {
+                ${entity} entityData = new ${entity}();
+                <#list table.fields as field>
+                <#if field.name == "AGE_VALUE">
+                List<String> ageValue = SplitUtil.splitStr(data.get("AGE_VALUE"));
+                entityData.setAgeValue(SplitUtil.isInteger(ageValue.get(0)));
+                entityData.setAgeUnit(ageValue.get(1));
+                <#elseif field.propertyType == "Double">
+                entityData.set${field.capitalName}(SplitUtil.isDouble(data.get("${field.name}")));
+                <#elseif field.propertyType == "Date">
+                entityData.set${field.capitalName}(SplitUtil.stringToDate(data.get("${field.name}")));
+                <#elseif field.propertyType == "Integer">
+                entityData.set${field.capitalName}(SplitUtil.isInteger(data.get("${field.name}")));
+                <#else>
+                entityData.set${field.capitalName}(StrUtil.trim(data.get("${field.name}")));
+                </#if>
+                </#list>
+                entityDataList.add(entityData);
+            } catch (Exception e) {
+                log.error("${table.serviceName}.saveDataToEntity.ID:{},error:{}", data.get("PK"), e.getMessage(), e);
+            }
         }
         try {
             this.saveBatch(entityDataList, 1000);

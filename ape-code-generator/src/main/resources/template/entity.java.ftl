@@ -77,7 +77,11 @@ public class ${entity} implements Serializable {
     <#if (logicDeleteFieldName!"") == field.name>
     @TableLogic
     </#if>
+    <#if field.propertyType == "Date">
+    private String ${field.propertyName};
+    <#else>
     private ${field.propertyType} ${field.propertyName};
+    </#if>
 </#list>
 <#------------  END 字段循环遍历  ---------->
 
