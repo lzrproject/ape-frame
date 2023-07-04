@@ -13,7 +13,7 @@ import java.util.Properties;
 /**
  * @Author: paoPao
  * @Date: 2023/3/11
- * @Description:
+ * @Description: 动态配置(类似于 nacos)
  */
 @Slf4j
 public class PropertiesUtils {

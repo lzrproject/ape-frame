@@ -17,5 +17,9 @@ import org.apache.ibatis.annotations.*;
 interface ${table.mapperName} : ${superMapperClass}<${entity}>
 <#else>
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+
+
+    @Delete("DELETE FROM ${table.name} where CORG_CODE = ${r'#{hospitalCode}'}")
+    int deleteCdaByCode(String hospitalCode);
 }
 </#if>

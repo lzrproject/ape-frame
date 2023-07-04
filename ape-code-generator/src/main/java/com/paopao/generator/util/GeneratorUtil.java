@@ -135,12 +135,12 @@ public class GeneratorUtil {
                 return projectPath + setParent.replaceAll("\\.","/") + "/service/" + tableInfo.getServiceImplName() + StringPool.DOT_JAVA;
             }
         });
-        fileOutConfigs.add(new FileOutConfig("/template/entity.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return projectPath + setParent.replaceAll("\\.","/") + "/entity/" + tableInfo.getEntityName() + StringPool.DOT_JAVA;
-            }
-        });
+//        fileOutConfigs.add(new FileOutConfig("/template/entity.java.ftl") {
+//            @Override
+//            public String outputFile(TableInfo tableInfo) {
+//                return projectPath + setParent.replaceAll("\\.","/") + "/entity/" + tableInfo.getEntityName() + StringPool.DOT_JAVA;
+//            }
+//        });
 //        fileOutConfigs.add(new FileOutConfig("/template/mapper.java.ftl") {
 //            @Override
 //            public String outputFile(TableInfo tableInfo) {

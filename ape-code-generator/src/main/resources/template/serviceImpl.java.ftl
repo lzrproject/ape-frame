@@ -47,7 +47,7 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
 
     @Override
     @Transactional
-    public void saveDataToEntity(List<Map<String, String>> datas) throws ParseException {
+    public String saveDataToEntity(List<Map<String, String>> datas, String jobType) throws ParseException {
         List<${entity}> entityDataList = new ArrayList<>();
         for (Map<String, String> data : datas) {
             try {
@@ -72,15 +72,26 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
                 log.error("${table.serviceName}.saveDataToEntity.ID:{},error:{}", data.get("PK"), e.getMessage(), e);
             }
         }
+        String fileName = "";
         try {
-            this.saveBatch(entityDataList, 1000);
+            // 1-历史数据 2-增量数据
+            if ("1".equals(jobType)) {
+                this.saveBatch(entityDataList, 1000);
+            }else {
+                this.saveOrUpdateBatch(entityDataList, 500);
+            }
         } catch (Exception e) {
             log.error("${table.serviceName}.saveDataToEntity.error：{}", e.getMessage(), e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             // 写入文件
-            SplitUtil.writeFile(JSONObject.toJSONString(datas), this.getCdaName().name());
+            fileName = SplitUtil.writeFile(JSONObject.toJSONString(datas), this.getCdaName().name());
         }
+        return fileName;
     }
 
+    @Override
+    public int delByHospitalCode(String hospitalCode) {
+        return this.baseMapper.deleteCdaByCode(hospitalCode);
+    }
 }
 </#if>
