@@ -1,4 +1,4 @@
-package com.paopao.mode.chainPattern;
+package com.paopao.mode.chainPattern.easy;
 
 /**
  * @Author: paoPao

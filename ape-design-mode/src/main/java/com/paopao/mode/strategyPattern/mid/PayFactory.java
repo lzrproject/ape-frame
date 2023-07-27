@@ -13,7 +13,7 @@ import java.util.Map;
  * @Date: 2022/12/18
  * @Description: 支付工厂类
  */
-@Component
+//@Component
 public class PayFactory implements InitializingBean {
 
     @Resource
