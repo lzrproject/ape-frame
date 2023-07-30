@@ -38,6 +38,6 @@ public abstract class AbstractCheckHandler {
         if (Objects.isNull(nextHandler)) {
             return "true";
         }
-        return nextHandler.next(param);
+        return nextHandler.handle(param);
     }
 }
