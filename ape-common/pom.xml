@@ -22,6 +22,7 @@
         <module>ape-common-websocket</module>
         <module>ape-common-test</module>
         <module>ape-common-job</module>
+        <module>ape-common-starter</module>
     </modules>
 
     <properties>

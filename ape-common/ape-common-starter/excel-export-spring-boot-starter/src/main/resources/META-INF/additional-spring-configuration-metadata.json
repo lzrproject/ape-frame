@@ -1,0 +1,18 @@
+{
+  "groups": [],
+  "hints": [],
+  "properties": [
+    {
+      "name": "paopao.export.excel.targetPath",
+      "type": "java.lang.String",
+      "description": "文件上传的地址.",
+      "defaultValue": ""
+    },
+    {
+      "name": "paopao.export.excel.maxExportCount",
+      "type": "java.lang.Long",
+      "description": "导出最大数据量.",
+      "defaultValue": "2000000"
+    }
+  ]
+}

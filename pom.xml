@@ -16,6 +16,7 @@
         <module>ape-sharding-jdbc</module>
         <module>ape-code-generator</module>
         <module>ape-dependencies</module>
+        <module>ape-demo</module>
     </modules>
 
 <!--    <parent>-->
