@@ -1,7 +1,11 @@
 package com.paopao.excel.core.csv;
 
+import com.paopao.excel.config.ExcelExportProperties;
 import com.paopao.excel.core.ExcelExportParams;
 import com.paopao.excel.core.ExcelFileDesc;
+import com.paopao.excel.core.ExcelService;
+import com.paopao.excel.core.ExportServer;
+import com.paopao.excel.core.handler.upload.UploadFileHandler;
 import com.paopao.excel.core.interfaces.CountExcelDataService;
 import com.paopao.excel.core.interfaces.SearchExcelDataService;
 
@@ -12,22 +16,24 @@ import com.paopao.excel.core.interfaces.SearchExcelDataService;
  * @Date 2023/11/3
  */
 @SuppressWarnings("all")
-public class CsvExportServer {
+public class CsvExportServer extends ExportServer {
 
-    /**
-     * 初始化导出内容
-     */
-    public Long exportBigExcel(String user, Object params, Class<?> exportBeanClass,
-                               SearchExcelDataService exportServer, CountExcelDataService countService, ExcelFileDesc fileDesc) {
-        return exportBigExcel(ExcelExportParams.build(user, params, exportBeanClass, exportServer, countService, fileDesc));
+    public CsvExportServer(ExcelService excelService, UploadFileHandler uploadFileHandler,
+                           ExcelExportProperties excelExportProperties) {
+        super(excelService, uploadFileHandler, excelExportProperties);
+//        this.server = excelService;
+//        this.uploadFileHandler = uploadFileHandler;
+//        this.excelExportProperties = excelExportProperties;
     }
 
     /**
      * 生成 excel 并保存文件
      */
-    private Long exportBigExcel(ExcelExportParams<?, ?> params) {
+    public Long exportBigExcel(ExcelExportParams<?, ?> params) {
         ExcelFileDesc fileDesc = params.getExcelFileDesc();
         String exportUser = params.getExportUser();
+        // 校验参数
+        super.checkParams(params);
         return 1L;
     }
 }

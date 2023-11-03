@@ -21,7 +21,7 @@ public class ExcelThreadFactory implements ThreadFactory {
 
     public final String namePrefix;
 
-    ExcelThreadFactory(String name) {
+    public ExcelThreadFactory(String name) {
         SecurityManager s = System.getSecurityManager();
         threadGroup = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
         if (StringUtils.isEmpty(name)) {

@@ -1,4 +1,4 @@
-package com.paopao.excel.core;
+package com.paopao.excel.core.excel;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.annotation.Excel;
@@ -7,6 +7,7 @@ import cn.afterturn.easypoi.handler.inter.IExcelExportServer;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.paopao.excel.config.ExcelExportProperties;
+import com.paopao.excel.core.*;
 import com.paopao.excel.core.handler.upload.UploadFileHandler;
 import com.paopao.excel.core.interfaces.CountExcelDataService;
 import com.paopao.excel.core.interfaces.SearchExcelDataService;
@@ -31,7 +32,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @SuppressWarnings("all")
-public class ExcelExportServer {
+public class ExcelExportServer extends ExportServer {
 
     private static final String extName = ".xlsx";
 
@@ -47,6 +48,7 @@ public class ExcelExportServer {
 
     public ExcelExportServer(ExcelService excelService, UploadFileHandler uploadFileHandler,
                              ExcelExportProperties excelExportProperties) {
+        super(excelService, uploadFileHandler, excelExportProperties);
         this.server = excelService;
         this.uploadFileHandler = uploadFileHandler;
         this.excelExportProperties = excelExportProperties;
@@ -72,7 +74,7 @@ public class ExcelExportServer {
     /**
      * 生成 excel 并保存文件
      */
-    private Long exportBigExcel(ExcelExportParams<?, ?> params) {
+    public Long exportBigExcel(ExcelExportParams<?, ?> params) {
         ExcelFileDesc excelFileDesc = params.getExcelFileDesc();
         String exportUser = params.getExportUser();
         // 校验参数
@@ -87,41 +89,6 @@ public class ExcelExportServer {
         // 导出并下载
         this.exportAndUpload(params, excelFileDesc, null, fileName, exportUser);
         return 1L;
-    }
-
-    /**
-     * 参数校验、注解校验
-     *
-     * @param params
-     */
-    private void checkParams(ExcelExportParams<?, ?> params) {
-        if (Objects.isNull(params)) {
-            ExceptionUtils.fail("导出参数为空");
-        }
-        if (Objects.isNull(params.getExcelFileDesc())) {
-            ExceptionUtils.fail("导出描述未定义");
-        }
-        if (Objects.isNull(params.getParams())) {
-            ExceptionUtils.fail("导出自定义参数为空");
-        }
-        if (Objects.isNull(params.getExportBeanClass())) {
-            ExceptionUtils.fail("导出实体未定义");
-        }
-        if (Objects.isNull(params.getExportServer())) {
-            ExceptionUtils.fail("导出服务类不存在");
-        }
-//        if (Objects.isNull(params.getCountServer())) {
-//            ExceptionUtils.fail("查询总数类不存在");
-//        }
-
-//        Field[] fields = params.getExportBeanClass().getDeclaredFields();
-//        boolean flag = true;
-//        for (Field field : fields) {
-//            if (field.isAnnotationPresent(Excel.class)) {
-//                flag = false;
-//                break;
-//            }
-//        }
     }
 
     private String genFileName(ExcelFileDesc excelFileDesc, String exportUser) {

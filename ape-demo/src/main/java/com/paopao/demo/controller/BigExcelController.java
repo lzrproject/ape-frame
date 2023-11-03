@@ -1,16 +1,10 @@
 package com.paopao.demo.controller;
 
 import com.paopao.demo.domain.ExportParams;
-import com.paopao.demo.domain.LoserResp;
-import com.paopao.demo.domain.User;
 import com.paopao.demo.domain.vo.JhemrCda02VO;
 import com.paopao.demo.service.ExportService;
 import com.paopao.demo.service.JhemrCda02Service;
-import com.paopao.excel.core.ExcelExportServer;
-import com.paopao.excel.core.ExcelFileDesc;
-import com.paopao.excel.core.interfaces.SearchExcelDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.paopao.excel.config;
 
-import com.paopao.excel.core.ExcelExportServer;
+import com.paopao.excel.core.excel.ExcelExportServer;
 import com.paopao.excel.core.ExcelService;
 import com.paopao.excel.core.handler.upload.UploadFileHandler;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
