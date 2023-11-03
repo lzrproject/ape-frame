@@ -1,8 +1,32 @@
 spring:
   application:
     name: ape-demo
-
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 20
+      min-idle: 20  #最小空闲
+      max-active: 100
+      max-wait: 60000
+      # StatViewServlet配置。（因为暴露的监控信息比较敏感，支持密码加密和访问ip限定）
+      # stat-view-servlet:
+      #对配置已开启的 filters 即 stat(sql 监控)wall（防火墙）
+      filter:
+        stat:
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 2000
+        wall:
+          enabled: true
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 paopao:
   export:
     excel:
       targetPath: E:\idea\demand
+      maxExportCount: 10000

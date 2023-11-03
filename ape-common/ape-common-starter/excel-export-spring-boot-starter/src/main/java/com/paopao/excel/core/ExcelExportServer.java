@@ -5,6 +5,7 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.handler.inter.IExcelExportServer;
 import cn.hutool.core.codec.Base64;
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.ArrayUtil;
@@ -16,10 +17,12 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.paopao.excel.config.ExcelExportProperties;
 import com.paopao.excel.constant.ExcelExportException;
 import com.paopao.excel.constant.ExportStatusEnum;
+import com.paopao.excel.constant.IExcelConst;
 import com.paopao.excel.core.handler.event.ExcelExportEventHandler;
 import com.paopao.excel.core.handler.upload.UploadFileHandler;
 import com.paopao.excel.core.interfare.CountExcelDataService;
 import com.paopao.excel.core.interfare.SearchExcelDataService;
+import com.paopao.excel.model.ExportTaskInfo;
 import com.paopao.excel.utils.ExceptionUtils;
 import com.paopao.redis.core.RedisHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -71,6 +74,37 @@ public class ExcelExportServer {
         this.excelExportProperties = excelExportProperties;
     }
 
+    public void incrProgress(Long taskId, Long res) {
+        excelExportHandler.incrProgress(taskId, res, getContext(taskId));
+    }
+
+    /**
+     * 删除任务
+     */
+    public Boolean delTask(Long taskId) {
+
+        ExportTaskInfo exportTaskInfo = excelExportHandler.delTask(taskId, getContext(taskId));
+        if (Objects.isNull(exportTaskInfo)) {
+            return false;
+        }
+        uploadFileHandler.delTask(exportTaskInfo);
+
+        return true;
+
+    }
+
+    /**
+     * 中断任务
+     * 提供标志为给切面做判断
+     */
+    public Boolean stopTask(Long taskId) {
+
+        String key = String.format(IExcelConst.STOP_EXPORT_KEY, taskId);
+        redisHandler.set(key, Convert.toStr(taskId), 1000L);
+        return true;
+
+    }
+
     /**
      * 重载
      */
@@ -112,7 +146,7 @@ public class ExcelExportServer {
             params.setExportUser(exportUser);
             params.setExportCount(exportCount);
             encryptStr = limitExportByParams(excelFileDesc.getFileName(), exportUser);
-            // TODO 可以考虑换成 Redission
+            // TODO 可以考虑换成 Redisson
             lock = redisHandler.lock(encryptStr, encryptStr, 600L);
             if (!lock) {
                 ExceptionUtils.fail("表格正在导出中，请稍等一会!");

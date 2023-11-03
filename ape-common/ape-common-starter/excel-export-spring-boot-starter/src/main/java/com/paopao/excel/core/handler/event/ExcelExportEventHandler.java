@@ -176,6 +176,5 @@ public class ExcelExportEventHandler implements ApplicationListener<ContextRefre
             }
         }
         return taskInfo;
-
     }
 }

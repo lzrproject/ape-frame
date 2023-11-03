@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.paopao.demo.mapper.JhemrCda02Mapper">
+
+    <resultMap id="BaseResultMap" type="com.paopao.demo.domain.JhemrCda02">
+            <id property="jhdlRowkey" column="JHDL_ROWKEY" jdbcType="BIGINT"/>
+            <result property="pk" column="PK" jdbcType="VARCHAR"/>
+            <result property="visitId" column="VISIT_ID" jdbcType="VARCHAR"/>
+            <result property="createPersonCode" column="CREATE_PERSON_CODE" jdbcType="VARCHAR"/>
+            <result property="createPersonName" column="CREATE_PERSON_NAME" jdbcType="VARCHAR"/>
+            <result property="createTime" column="CREATE_TIME" jdbcType="VARCHAR"/>
+            <result property="patientId" column="PATIENT_ID" jdbcType="VARCHAR"/>
+            <result property="applyNo" column="APPLY_NO" jdbcType="VARCHAR"/>
+            <result property="idCardNo" column="ID_CARD_NO" jdbcType="VARCHAR"/>
+            <result property="patientName" column="PATIENT_NAME" jdbcType="VARCHAR"/>
+            <result property="patientSex" column="PATIENT_SEX" jdbcType="VARCHAR"/>
+            <result property="patientDateOfBirth" column="PATIENT_DATE_OF_BIRTH" jdbcType="VARCHAR"/>
+            <result property="patientAge" column="PATIENT_AGE" jdbcType="VARCHAR"/>
+            <result property="patientDeptId" column="PATIENT_DEPT_ID" jdbcType="VARCHAR"/>
+            <result property="patientDeptName" column="PATIENT_DEPT_NAME" jdbcType="VARCHAR"/>
+            <result property="patientMedicalCode" column="PATIENT_MEDICAL_CODE" jdbcType="VARCHAR"/>
+            <result property="patientMedicalName" column="PATIENT_MEDICAL_NAME" jdbcType="VARCHAR"/>
+            <result property="visitDatetime" column="VISIT_DATETIME" jdbcType="VARCHAR"/>
+            <result property="corgCode" column="CORG_CODE" jdbcType="VARCHAR"/>
+            <result property="corgName" column="CORG_NAME" jdbcType="VARCHAR"/>
+            <result property="responsiblePhysicianCode" column="RESPONSIBLE_PHYSICIAN_CODE" jdbcType="VARCHAR"/>
+            <result property="responsiblePhysicianName" column="RESPONSIBLE_PHYSICIAN_NAME" jdbcType="VARCHAR"/>
+            <result property="responsiblePhysicianSignTime" column="RESPONSIBLE_PHYSICIAN_SIGN_TIME" jdbcType="VARCHAR"/>
+            <result property="parentDocumentId" column="PARENT_DOCUMENT_ID" jdbcType="VARCHAR"/>
+            <result property="parentDocumentCode" column="PARENT_DOCUMENT_CODE" jdbcType="VARCHAR"/>
+            <result property="parentDocumentVersion" column="PARENT_DOCUMENT_VERSION" jdbcType="VARCHAR"/>
+            <result property="allergicHistoryFlag" column="ALLERGIC_HISTORY_FLAG" jdbcType="CHAR"/>
+            <result property="allergicHistory" column="ALLERGIC_HISTORY" jdbcType="VARCHAR"/>
+            <result property="chiefComplaint" column="CHIEF_COMPLAINT" jdbcType="VARCHAR"/>
+            <result property="presentHistory" column="PRESENT_HISTORY" jdbcType="VARCHAR"/>
+            <result property="pastHistory" column="PAST_HISTORY" jdbcType="VARCHAR"/>
+            <result property="commomCondtionExamResults" column="COMMOM_CONDTION_EXAM_RESULTS" jdbcType="VARCHAR"/>
+            <result property="examPositiveItem" column="EXAM_POSITIVE_ITEM" jdbcType="VARCHAR"/>
+            <result property="examPositiveresult" column="EXAM_POSITIVERESULT" jdbcType="VARCHAR"/>
+            <result property="firstVisitFlagName" column="FIRST_VISIT_FLAG_NAME" jdbcType="VARCHAR"/>
+            <result property="chinesefourObservationDescript" column="CHINESEFOUR_OBSERVATION_DESCRIPT" jdbcType="VARCHAR"/>
+            <result property="westernMedicineCode" column="WESTERN_MEDICINE_CODE" jdbcType="VARCHAR"/>
+            <result property="westernMedicineName" column="WESTERN_MEDICINE_NAME" jdbcType="VARCHAR"/>
+            <result property="tcmDiseaseCode" column="TCM_DISEASE_CODE" jdbcType="VARCHAR"/>
+            <result property="tcmDiseaseName" column="TCM_DISEASE_NAME" jdbcType="VARCHAR"/>
+            <result property="tcmSyndromeCode" column="TCM_SYNDROME_CODE" jdbcType="VARCHAR"/>
+            <result property="tcmSyndromeName" column="TCM_SYNDROME_NAME" jdbcType="VARCHAR"/>
+            <result property="syndromeDiffAndTrea" column="SYNDROME_DIFF_AND_TREA" jdbcType="VARCHAR"/>
+            <result property="therapeuticPrinciple" column="THERAPEUTIC_PRINCIPLE" jdbcType="VARCHAR"/>
+            <result property="orderClassCode" column="ORDER_CLASS_CODE" jdbcType="VARCHAR"/>
+            <result property="orderClassName" column="ORDER_CLASS_NAME" jdbcType="VARCHAR"/>
+            <result property="orderPlanBeginTime" column="ORDER_PLAN_BEGIN_TIME" jdbcType="VARCHAR"/>
+            <result property="orderPlanEndTime" column="ORDER_PLAN_END_TIME" jdbcType="VARCHAR"/>
+            <result property="orderPrescTime" column="ORDER_PRESC_TIME" jdbcType="VARCHAR"/>
+            <result property="orderPrescSign" column="ORDER_PRESC_SIGN" jdbcType="VARCHAR"/>
+            <result property="orderPrescDeptName" column="ORDER_PRESC_DEPT_NAME" jdbcType="VARCHAR"/>
+            <result property="orderTime" column="ORDER_TIME" jdbcType="VARCHAR"/>
+            <result property="orderDoctorSign" column="ORDER_DOCTOR_SIGN" jdbcType="VARCHAR"/>
+            <result property="orderDeptName" column="ORDER_DEPT_NAME" jdbcType="VARCHAR"/>
+            <result property="orderConfirmerSign" column="ORDER_CONFIRMER_SIGN" jdbcType="VARCHAR"/>
+            <result property="orderConfirmTime" column="ORDER_CONFIRM_TIME" jdbcType="VARCHAR"/>
+            <result property="orderCancelTime" column="ORDER_CANCEL_TIME" jdbcType="VARCHAR"/>
+            <result property="cancelDoctorSign" column="CANCEL_DOCTOR_SIGN" jdbcType="VARCHAR"/>
+            <result property="orderNote" column="ORDER_NOTE" jdbcType="VARCHAR"/>
+            <result property="orderPrescStatus" column="ORDER_PRESC_STATUS" jdbcType="VARCHAR"/>
+            <result property="jhdlSrcTab" column="JHDL_SRC_TAB" jdbcType="VARCHAR"/>
+            <result property="jhdlCreatedAt" column="JHDL_CREATED_AT" jdbcType="TIMESTAMP"/>
+            <result property="jhdlUpdatedAt" column="JHDL_UPDATED_AT" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        JHDL_ROWKEY,PK,VISIT_ID,
+        CREATE_PERSON_CODE,CREATE_PERSON_NAME,CREATE_TIME,
+        PATIENT_ID,APPLY_NO,ID_CARD_NO,
+        PATIENT_NAME,PATIENT_SEX,PATIENT_DATE_OF_BIRTH,
+        PATIENT_AGE,PATIENT_DEPT_ID,PATIENT_DEPT_NAME,
+        PATIENT_MEDICAL_CODE,PATIENT_MEDICAL_NAME,VISIT_DATETIME,
+        CORG_CODE,CORG_NAME,RESPONSIBLE_PHYSICIAN_CODE,
+        RESPONSIBLE_PHYSICIAN_NAME,RESPONSIBLE_PHYSICIAN_SIGN_TIME,PARENT_DOCUMENT_ID,
+        PARENT_DOCUMENT_CODE,PARENT_DOCUMENT_VERSION,ALLERGIC_HISTORY_FLAG,
+        ALLERGIC_HISTORY,CHIEF_COMPLAINT,PRESENT_HISTORY,
+        PAST_HISTORY,COMMOM_CONDTION_EXAM_RESULTS,EXAM_POSITIVE_ITEM,
+        EXAM_POSITIVERESULT,FIRST_VISIT_FLAG_NAME,CHINESEFOUR_OBSERVATION_DESCRIPT,
+        WESTERN_MEDICINE_CODE,WESTERN_MEDICINE_NAME,TCM_DISEASE_CODE,
+        TCM_DISEASE_NAME,TCM_SYNDROME_CODE,TCM_SYNDROME_NAME,
+        SYNDROME_DIFF_AND_TREA,THERAPEUTIC_PRINCIPLE,ORDER_CLASS_CODE,
+        ORDER_CLASS_NAME,ORDER_PLAN_BEGIN_TIME,ORDER_PLAN_END_TIME,
+        ORDER_PRESC_TIME,ORDER_PRESC_SIGN,ORDER_PRESC_DEPT_NAME,
+        ORDER_TIME,ORDER_DOCTOR_SIGN,ORDER_DEPT_NAME,
+        ORDER_CONFIRMER_SIGN,ORDER_CONFIRM_TIME,ORDER_CANCEL_TIME,
+        CANCEL_DOCTOR_SIGN,ORDER_NOTE,ORDER_PRESC_STATUS,
+        JHDL_SRC_TAB,JHDL_CREATED_AT,JHDL_UPDATED_AT
+    </sql>
+
+    <sql id="JhemrCda02_VO">
+        PK,VISIT_ID,
+        CREATE_PERSON_CODE,CREATE_PERSON_NAME,CREATE_TIME,
+        PATIENT_ID,APPLY_NO,ID_CARD_NO,
+        PATIENT_NAME,PATIENT_SEX,PATIENT_DATE_OF_BIRTH,
+        PATIENT_AGE,PATIENT_DEPT_NAME,
+        PATIENT_MEDICAL_CODE,PATIENT_MEDICAL_NAME,VISIT_DATETIME,
+        CORG_CODE,CORG_NAME,RESPONSIBLE_PHYSICIAN_CODE,
+        RESPONSIBLE_PHYSICIAN_NAME,RESPONSIBLE_PHYSICIAN_SIGN_TIME,
+        ALLERGIC_HISTORY_FLAG,
+        ALLERGIC_HISTORY,CHIEF_COMPLAINT,PRESENT_HISTORY,
+        PAST_HISTORY,COMMOM_CONDTION_EXAM_RESULTS,EXAM_POSITIVE_ITEM,
+        EXAM_POSITIVERESULT,FIRST_VISIT_FLAG_NAME,CHINESEFOUR_OBSERVATION_DESCRIPT,
+        WESTERN_MEDICINE_CODE,WESTERN_MEDICINE_NAME,TCM_DISEASE_CODE,
+        TCM_DISEASE_NAME,TCM_SYNDROME_CODE,TCM_SYNDROME_NAME,
+        SYNDROME_DIFF_AND_TREA,THERAPEUTIC_PRINCIPLE,ORDER_CLASS_CODE,
+        ORDER_CLASS_NAME,ORDER_PLAN_BEGIN_TIME,ORDER_PLAN_END_TIME,
+        ORDER_PRESC_TIME,ORDER_PRESC_SIGN,ORDER_PRESC_DEPT_NAME,
+        ORDER_TIME,ORDER_DOCTOR_SIGN,ORDER_DEPT_NAME,
+        ORDER_CONFIRMER_SIGN,ORDER_CONFIRM_TIME,ORDER_CANCEL_TIME,
+        CANCEL_DOCTOR_SIGN,ORDER_NOTE,ORDER_PRESC_STATUS
+    </sql>
+
+    <select id="selectListByCondition" parameterType="com.paopao.demo.domain.ExportParams" resultType="com.paopao.demo.domain.vo.JhemrCda02VO">
+        select
+        <include refid="JhemrCda02_VO" />
+        from `jhemr_cda02` a
+        JOIN
+        (select JHDL_ROWKEY as tmpId from `jhemr_cda02`
+        <where>
+            <if test="year != null and year != ''">
+                and Year(CREATE_TIME) >= #{year}
+            </if>
+            <if test="yearMonth != null and yearMonth != ''">
+                and date_format(CREATE_TIME,'%Y-%m') >= #{yearMonth}
+            </if>
+        </where>
+        order by CREATE_TIME desc
+        <if test="size != null and size != ''">
+            limit #{start},#{size}
+        </if>
+        ) b
+        ON a.JHDL_ROWKEY = b.tmpId
+    </select>
+</mapper>

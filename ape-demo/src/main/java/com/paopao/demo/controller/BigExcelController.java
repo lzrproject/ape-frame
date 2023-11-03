@@ -1,16 +1,19 @@
 package com.paopao.demo.controller;
 
-import com.paopao.demo.domain.LoserReq;
+import com.paopao.demo.domain.ExportParams;
 import com.paopao.demo.domain.LoserResp;
-import com.paopao.demo.service.LoserService;
-import com.paopao.excel.constant.CheckExportIsReturn;
+import com.paopao.demo.domain.User;
+import com.paopao.demo.domain.vo.JhemrCda02VO;
+import com.paopao.demo.service.ExportService;
+import com.paopao.demo.service.JhemrCda02Service;
 import com.paopao.excel.core.ExcelExportServer;
 import com.paopao.excel.core.ExcelFileDesc;
+import com.paopao.excel.core.interfaces.SearchExcelDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 模块描述
@@ -23,32 +26,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class BigExcelController {
 
     @GetMapping("checkIsReturn")
-    @CheckExportIsReturn
+//    @CheckExportIsReturn
     public void checkIsReturn() {
         System.out.println("进入方法 checkIsReturn");
     }
 
     @Autowired
-    private ExcelExportServer excelExportServer;
+    private ExportService exportService;
 
     @Autowired
-    private LoserService loserService;
+    private JhemrCda02Service jhemrCda02Service;
 
     @GetMapping("/export")
     public Long test() {
-        LoserReq req = new LoserReq();
-        req.setUuid(100L);
-        String user = "loser";
-//        LoserResp.class.get.getFields();
-//        return null;
-        return excelExportServer.exportBigExcel(
-                user,
-                req,
-                LoserResp.class,
-                loserService::getCount,
-                loserService::selectListForExcelExport,
-                ExcelFileDesc.build("用户数据表", "user")
-        );
+        exportService.execBigExcel();
+        return 1000L;
+    }
+
+    @PostMapping("test")
+    public List<JhemrCda02VO> getUrl(@RequestBody ExportParams exportParams) {
+        return jhemrCda02Service.getListByCondition(exportParams, 1L);
     }
 
 }

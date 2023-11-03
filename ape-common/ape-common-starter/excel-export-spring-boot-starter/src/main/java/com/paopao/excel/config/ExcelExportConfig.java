@@ -29,8 +29,8 @@ public class ExcelExportConfig {
     }
 
     @Bean
-    public ExcelExportAspect excelExportAspect() {
-        return new ExcelExportAspect();
+    public ExcelExportAspect excelExportAspect(RedisHandler redisHandler, ExcelExportServer excelExportServer) {
+        return new ExcelExportAspect(redisHandler, excelExportServer);
     }
 
     @Bean
