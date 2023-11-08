@@ -40,6 +40,7 @@ public class DefaultUploadFileHandler implements UploadFileHandler {
                 log.info("uploadWordBook mkdirs {} res {}", path, mkdirs);
             }
             String filePath = path + fileName;
+
             FileOutputStream out = new FileOutputStream(filePath);
             wb.write(out);
             out.close();

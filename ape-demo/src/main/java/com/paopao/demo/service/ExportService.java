@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.paopao.demo.domain.ExportParams;
 import com.paopao.demo.domain.vo.JhemrCda02VO;
 import com.paopao.excel.core.ExcelExportParams;
+import com.paopao.excel.core.csv.CsvExportServer;
 import com.paopao.excel.core.excel.ExcelExportServer;
 import com.paopao.excel.core.ExcelFileDesc;
 import com.paopao.excel.core.ExportContext;
@@ -25,6 +26,9 @@ public class ExportService {
 
     @Autowired
     private ExcelExportServer excelExportServer;
+
+    @Autowired
+    private CsvExportServer csvExportServer;
 
     public Long getCount(ExcelExportParams<ExportParams, JhemrCda02VO> queryParams) {
 //        ExportParams params = queryParams.getParams();
@@ -66,11 +70,28 @@ public class ExportService {
         ExportParams req = new ExportParams();
         req.setUuid(100L);
         req.setYear("2023");
-        req.setCount(500000L);
+        req.setCount(50000L);
         this.checkParams(req);
         String userName = "paopao";
 //        LoserResp.class.get.getFields();
         return excelExportServer.exportBigExcel(
+                userName,
+                req,
+                JhemrCda02VO.class,
+                this::selectListForExcelExport,
+                ExcelFileDesc.build("jhemr_cda02", "user")
+        );
+    }
+
+    public Long execBigCsv() {
+        ExportParams req = new ExportParams();
+        req.setUuid(100L);
+        req.setYear("2023");
+        req.setCount(50000L);
+        this.checkParams(req);
+        String userName = "paopao";
+//        LoserResp.class.get.getFields();
+        return csvExportServer.exportBigExcel(
                 userName,
                 req,
                 JhemrCda02VO.class,

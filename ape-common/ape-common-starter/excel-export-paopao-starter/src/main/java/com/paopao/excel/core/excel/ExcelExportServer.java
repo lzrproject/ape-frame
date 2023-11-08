@@ -39,41 +39,42 @@ public class ExcelExportServer extends ExportServer {
     /**
      * 公用线程池，用来异步执行一些非重要操作，这里只给150个线程，对于需要及时完成的任务应该使用专用线程池
      */
-    public static final ExecutorService EXECUTOR_GENERAL = new ThreadPoolExecutor(10, 150,
-            0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(10000), new ExcelThreadFactory("easy-export"));
-
+//    public static final ExecutorService EXECUTOR_GENERAL = new ThreadPoolExecutor(10, 150,
+//            0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(10000), new ExcelThreadFactory("easy-export"));
+//
     private final ExcelService server;
     private final UploadFileHandler uploadFileHandler;
-    private final ExcelExportProperties excelExportProperties;
-
+//    private final ExcelExportProperties excelExportProperties;
+//
     public ExcelExportServer(ExcelService excelService, UploadFileHandler uploadFileHandler,
                              ExcelExportProperties excelExportProperties) {
-        super(excelService, uploadFileHandler, excelExportProperties);
+        super(excelExportProperties);
         this.server = excelService;
         this.uploadFileHandler = uploadFileHandler;
-        this.excelExportProperties = excelExportProperties;
+//        this.excelExportProperties = excelExportProperties;
     }
 
-    /**
-     * 初始化导出内容
-     */
-    public Long exportBigExcel(String user, Object params, Class<?> exportBeanClass,
-                               SearchExcelDataService exportServer, CountExcelDataService countService, ExcelFileDesc fileDesc) {
-        return exportBigExcel(ExcelExportParams.build(user, params, exportBeanClass, exportServer, countService, fileDesc));
-    }
-
-    /**
-     * 初始化导出内容(无统计数量)
-     */
-    public Long exportBigExcel(String user, Object params, Class<?> exportBeanClass,
-                               SearchExcelDataService exportServer, ExcelFileDesc fileDesc) {
-        ExportContext context = ExportContext.empty();
-        return exportBigExcel(ExcelExportParams.build(user, params, exportBeanClass, exportServer, fileDesc, context));
-    }
+//    /**
+//     * 初始化导出内容
+//     */
+//    public Long exportBigExcel(String user, Object params, Class<?> exportBeanClass,
+//                               SearchExcelDataService exportServer, CountExcelDataService countService, ExcelFileDesc fileDesc) {
+//        return exportBigExcel(ExcelExportParams.build(user, params, exportBeanClass, exportServer, countService, fileDesc));
+//    }
+//
+//    /**
+//     * 初始化导出内容(无统计数量)
+//     */
+//    public Long exportBigExcel(String user, Object params, Class<?> exportBeanClass,
+//                               SearchExcelDataService exportServer, ExcelFileDesc fileDesc) {
+//        ExportContext context = ExportContext.empty();
+//        return exportBigExcel(ExcelExportParams.build(user, params, exportBeanClass, exportServer, fileDesc, context));
+//    }
 
     /**
      * 生成 excel 并保存文件
      */
+    @Override
     public Long exportBigExcel(ExcelExportParams<?, ?> params) {
         ExcelFileDesc excelFileDesc = params.getExcelFileDesc();
         String exportUser = params.getExportUser();
@@ -95,7 +96,11 @@ public class ExcelExportServer extends ExportServer {
         return excelFileDesc.getFileName() + "_" + DateUtil.format(new Date(), "yyyy_MM_dd_HH_mm_ss") + "_by_" + exportUser + extName;
     }
 
-    private void exportAndUpload(ExcelExportParams<?, ?> params, ExcelFileDesc excelFileDesc, String encryptStr, String fileName, String optUser) {
+    /**
+     * 异步生成文件并上传
+     */
+    @Override
+    public void exportAndUpload(ExcelExportParams<?, ?> params, ExcelFileDesc excelFileDesc, String encryptStr, String fileName, String optUser) {
         StopWatch watch = new StopWatch();
         watch.start();
 //        long start = System.currentTimeMillis();
@@ -138,7 +143,7 @@ public class ExcelExportServer extends ExportServer {
      */
     private void uploadAndUpdateTask(SXSSFWorkbook workbook, String fileName, Long taskId, String category, String optUser) {
 
-        String path = uploadFileHandler.uploadWordBook(workbook, fileName, excelExportProperties.getTargetPath(), category, optUser);
+        String path = uploadFileHandler.uploadWordBook(workbook, fileName, super.excelExportProperties.getTargetPath(), category, optUser);
 //        excelExportHandler.updateTaskPath(taskId, path, getContext(taskId));
 
     }

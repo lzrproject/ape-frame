@@ -1,5 +1,6 @@
 package com.paopao.excel.config;
 
+import com.paopao.excel.core.csv.CsvExportServer;
 import com.paopao.excel.core.excel.ExcelExportServer;
 import com.paopao.excel.core.ExcelService;
 import com.paopao.excel.core.handler.upload.UploadFileHandler;
@@ -32,6 +33,14 @@ public class ExcelExportConfiguration {
     }
 
     /**
+     * 导出Csv实现类
+     */
+    @Bean
+    public CsvExportServer csvExportServer(UploadFileHandler uploadFileHandler) {
+        return new CsvExportServer(uploadFileHandler, excelExportProperties);
+    }
+
+    /**
      * 服务类 service
      */
     @Bean
@@ -40,7 +49,7 @@ public class ExcelExportConfiguration {
     }
 
     /**
-     * 服务类 service
+     * 文件上次处理类
      */
     @Bean
     public UploadFileHandler uploadFileHandler() throws Exception {

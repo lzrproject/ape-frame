@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 模块描述
+ * 导出抽象类服务
  *
  * @Author paoPao
  * @Date 2023/11/3
@@ -31,14 +31,13 @@ public abstract class ExportServer {
     public static final ExecutorService EXECUTOR_GENERAL = new ThreadPoolExecutor(10, 150,
             0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(10000), new ExcelThreadFactory("easy-export"));
 
-    private final ExcelService server;
-    private final UploadFileHandler uploadFileHandler;
-    private final ExcelExportProperties excelExportProperties;
+//    private final ExcelService server;
+//    private final UploadFileHandler uploadFileHandler;
+    protected final ExcelExportProperties excelExportProperties;
 
-    public ExportServer(ExcelService excelService, UploadFileHandler uploadFileHandler,
-                             ExcelExportProperties excelExportProperties) {
-        this.server = excelService;
-        this.uploadFileHandler = uploadFileHandler;
+    public ExportServer(ExcelExportProperties excelExportProperties) {
+//        this.server = excelService;
+//        this.uploadFileHandler = uploadFileHandler;
         this.excelExportProperties = excelExportProperties;
     }
 
@@ -51,9 +50,23 @@ public abstract class ExportServer {
     }
 
     /**
+     * 初始化导出内容(无统计数量)
+     */
+    public Long exportBigExcel(String user, Object params, Class<?> exportBeanClass,
+                               SearchExcelDataService exportServer, ExcelFileDesc fileDesc) {
+        ExportContext context = ExportContext.empty();
+        return exportBigExcel(ExcelExportParams.build(user, params, exportBeanClass, exportServer, fileDesc, context));
+    }
+
+    /**
      * 生成 excel 并保存文件
      */
     public abstract Long exportBigExcel(ExcelExportParams<?, ?> params);
+
+    /**
+     * 异步生成文件并上传
+     */
+    public abstract void exportAndUpload(ExcelExportParams<?, ?> params, ExcelFileDesc excelFileDesc, String encryptStr, String fileName, String optUser);
 
     /**
      * 参数校验、注解校验

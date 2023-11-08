@@ -64,6 +64,7 @@ public class CsvController {
                 list.add(user);
             }
             beanToCsv.write(list);
+            beanToCsv.write(list);
 //            icsvWriter = new CSVWriterBuilder(writer)
 ////                    .withSeparator('\t')
 //                    .build();

@@ -37,6 +37,12 @@ public class BigExcelController {
         return 1000L;
     }
 
+    @GetMapping("/exportCsv")
+    public Long csv() {
+        exportService.execBigCsv();
+        return 1000L;
+    }
+
     @PostMapping("test")
     public List<JhemrCda02VO> getUrl(@RequestBody ExportParams exportParams) {
         return jhemrCda02Service.getListByCondition(exportParams, 1L);
