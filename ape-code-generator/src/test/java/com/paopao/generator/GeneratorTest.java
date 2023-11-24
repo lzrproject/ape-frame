@@ -66,7 +66,7 @@ public class GeneratorTest {
         param.setModelName("jhmrdr");
         param.setTableName(tableName.toArray(new String[]{}));
         param.setDriverClass("com.mysql.cj.jdbc.Driver");
-        param.setUrl("jdbc:mysql://10.240.246.207:4000/JHDL?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true&rewriteBatchedStatements=true&tinyInt1isBit=false&allowMultiQueries=true&sessionVariables=group_concat_max_len=1024000");
+        param.setUrl("jdbc:mysql://10.240.246.206:4000/JHDL?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true&rewriteBatchedStatements=true&tinyInt1isBit=false&allowMultiQueries=true&sessionVariables=group_concat_max_len=1024000");
         param.setUsername("root");
         param.setPassword("jhmk5354(#($");
         codeController.create(param);

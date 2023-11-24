@@ -70,7 +70,7 @@ public class ExportService {
         ExportParams req = new ExportParams();
         req.setUuid(100L);
         req.setYear("2023");
-        req.setCount(50000L);
+        req.setCount(500000L);
         this.checkParams(req);
         String userName = "paopao";
 //        LoserResp.class.get.getFields();
@@ -87,7 +87,7 @@ public class ExportService {
         ExportParams req = new ExportParams();
         req.setUuid(100L);
         req.setYear("2023");
-        req.setCount(50000L);
+        req.setCount(500000L);
         this.checkParams(req);
         String userName = "paopao";
 //        LoserResp.class.get.getFields();

@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.NumberUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jhdl.mrdr.handle.JhemrCdaStrategy;
 import com.jhdl.mrdr.entity.JhemrCdaEnum;
 import ${package.Entity}.${entity};
@@ -32,7 +33,7 @@ import java.util.*;
 */
 @Service
 @Slf4j
-@DS("JHMRDR")
+@DS("CDAETL")
 <#if kotlin>
 open class ${table.serviceName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {
 
@@ -47,7 +48,7 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
 
     @Override
     @Transactional
-    public String saveDataToEntity(List<Map<String, String>> datas, String jobType) throws ParseException {
+    public String saveDataToEntity(List<Map<String, String>> datas, String jobType, String hospitalCode) throws ParseException {
         List<${entity}> entityDataList = new ArrayList<>();
         for (Map<String, String> data : datas) {
             try {
@@ -84,7 +85,7 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
             log.error("${table.serviceName}.saveDataToEntity.error：{}", e.getMessage(), e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             // 写入文件
-            fileName = SplitUtil.writeFile(JSONObject.toJSONString(datas), this.getCdaName().name());
+            fileName = SplitUtil.writeFile(JSONObject.toJSONString(datas), hospitalCode + "_" + this.getCdaName().name());
         }
         return fileName;
     }
@@ -92,6 +93,19 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
     @Override
     public int delByHospitalCode(String hospitalCode) {
         return this.baseMapper.deleteCdaByCode(hospitalCode);
+    }
+
+    @Override
+    public String getLastDateTime(String hospitalCode) {
+        QueryWrapper<${entity}> wrapper = new QueryWrapper<>();
+        wrapper.select("max(`UPDATED_AT`) as UPDATED_AT")
+            .eq("CORG_CODE", hospitalCode);
+        ${entity} entityDto = this.baseMapper.selectOne(wrapper);
+        String lastDateTime = null;
+        if (entityDto != null) {
+            lastDateTime = entityDto.getUpdatedAt();
+        }
+        return lastDateTime;
     }
 }
 </#if>
