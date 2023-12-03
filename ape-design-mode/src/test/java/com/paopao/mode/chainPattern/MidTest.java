@@ -5,16 +5,19 @@ import com.paopao.mode.ModeApplication;
 import com.paopao.mode.chainPattern.mid.AbstractCheckHandler;
 import com.paopao.mode.chainPattern.mid.CheckFactory;
 import com.paopao.mode.chainPattern.mid.ProductCheckHandlerConfig;
+import com.paopao.mode.strategyPattern.mid.PayHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.platform.commons.util.StringUtils;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -62,5 +65,13 @@ public class MidTest {
         return JSON.parseObject(configJson, ProductCheckHandlerConfig.class);
     }
 
+    @Resource
+    private List<PayHandler> bankPayHandler1;
+
+    @Test
+    public void beanTest() {
+        BeanUtils.copyProperties();
+        System.out.println(bankPayHandler1);
+    }
 
 }

@@ -18,4 +18,6 @@ public class Demo {
         PayHandler payHandler = payFactory.getHandlerByCode(1);
         payHandler.dealPay();
     }
+
+
 }

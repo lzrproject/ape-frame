@@ -41,7 +41,7 @@ public class ExecutorTest {
         long start = System.currentTimeMillis();
         List<Future> futures = new ArrayList<>();
         for (int i = 0; i < taskNum; i++) {
-            User user = new User();
+            User user = new User("admin");
             user.setUsername("admin" + i);
             cdaExecutor.submit(new Task(user));
         }
