@@ -7,6 +7,7 @@ import cn.afterturn.easypoi.handler.inter.IExcelExportServer;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.lang.UUID;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.IdUtil;
@@ -135,6 +136,7 @@ public class ExcelExportServer {
         String exportUser = params.getExportUser();
         boolean lock = false;
         try {
+            String a = UUID.fastUUID() + "1" +"2";
             // 02 检测导出数量
             Long exportCount = getTotalCount(params);
             checkExportCount(exportCount, excelExportProperties.getMaxExportCount());
