@@ -6,6 +6,7 @@ import com.paopao.demo.domain.vo.JhemrCda02VO;
 import com.paopao.excel.core.ExcelExportParams;
 import com.paopao.excel.core.csv.CsvExportServer;
 import com.paopao.excel.core.excel.ExcelExportServer;
+import java.util.Collections;
 import com.paopao.excel.core.ExcelFileDesc;
 import com.paopao.excel.core.ExportContext;
 import lombok.extern.slf4j.Slf4j;
@@ -59,7 +60,7 @@ public class ExportService {
         // 当前已导出数量
         Long curSize = context.getContext("curSize", Long.class);
         if (curSize != null && curSize > exportCount) {
-            return null;
+            return Collections.emptyList();
         }
         List<JhemrCda02VO> cda02VOS = jhemrCda02Service.getListByCondition(params, page);
         context.put("curSize", curSize == null ? cda02VOS.size() : curSize + cda02VOS.size());
@@ -69,8 +70,8 @@ public class ExportService {
     public Long execBigExcel() {
         ExportParams req = new ExportParams();
         req.setUuid(100L);
-        req.setYear("2023");
-        req.setCount(500000L);
+        req.setDateStr("2022-01-01");
+        req.setCount(5000000L);
         this.checkParams(req);
         String userName = "paopao";
 //        LoserResp.class.get.getFields();
@@ -86,7 +87,7 @@ public class ExportService {
     public Long execBigCsv() {
         ExportParams req = new ExportParams();
         req.setUuid(100L);
-        req.setYear("2023");
+        req.setDateStr("2022-01-01");
         req.setCount(500000L);
         this.checkParams(req);
         String userName = "paopao";
@@ -101,14 +102,10 @@ public class ExportService {
     }
 
     private void checkParams(ExportParams exportParams) {
-        String year = exportParams.getYear();
-        String yearMonth = exportParams.getYearMonth();
+        String dateStr = exportParams.getDateStr();
         Long count = exportParams.getCount();
-        if (year == null && yearMonth == null) {
-            throw new IllegalArgumentException("年份和月份字段参数不能为NULL");
-        }
-        if (year != null && yearMonth != null) {
-            exportParams.setYearMonth(null);
+        if (dateStr == null) {
+            throw new IllegalArgumentException("筛选字段参数不能为NULL");
         }
         Preconditions.checkNotNull(count, "查询数量不允许为NULL");
     }

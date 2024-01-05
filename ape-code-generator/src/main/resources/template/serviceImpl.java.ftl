@@ -3,7 +3,7 @@ package ${package.Service};
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.NumberUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jhdl.mrdr.handle.JhemrCdaStrategy;
 import com.jhdl.mrdr.entity.JhemrCdaEnum;
@@ -13,9 +13,9 @@ import ${superServiceImplClassPackage};
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.jhdl.mrdr.util.SplitUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -41,14 +41,16 @@ open class ${table.serviceName} : ${superServiceImplClass}<${table.mapperName}, 
 <#else>
 public class ${table.serviceName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements JhemrCdaStrategy<${entity}> {
 
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+
     @Override
     public JhemrCdaEnum getCdaName() {
         return JhemrCdaEnum.${table.name?upper_case};
     }
 
     @Override
-    @Transactional
-    public String saveDataToEntity(List<Map<String, String>> datas, String jobType, String hospitalCode) throws ParseException {
+    public String saveDataToEntity(List<Map<String, String>> datas, String jobType, String hospitalCode) {
         List<${entity}> entityDataList = new ArrayList<>();
         for (Map<String, String> data : datas) {
             try {
@@ -73,21 +75,23 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
                 log.error("${table.serviceName}.saveDataToEntity.ID:{},error:{}", data.get("PK"), e.getMessage(), e);
             }
         }
-        String fileName = "";
-        try {
-            // 1-历史数据 2-增量数据
-            if ("1".equals(jobType)) {
-                this.saveBatch(entityDataList, 1000);
-            }else {
-                this.saveOrUpdateBatch(entityDataList, 500);
+        return transactionTemplate.execute(transactionStatus -> {
+            String fileName = "";
+            try {
+                // 1-历史数据 2-增量数据
+                if ("1".equals(jobType)) {
+                    this.saveBatch(entityDataList, 1000);
+                }else {
+                    this.saveOrUpdateBatch(entityDataList, 500);
+                }
+            } catch (Exception e) {
+                log.error("${table.serviceName}.saveDataToEntity.error：{}", e.getMessage(), e);
+                transactionStatus.setRollbackOnly();
+                // 写入文件
+                fileName = SplitUtil.writeFile(JSON.toJSONString(datas), hospitalCode + "_" + this.getCdaName().name());
             }
-        } catch (Exception e) {
-            log.error("${table.serviceName}.saveDataToEntity.error：{}", e.getMessage(), e);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            // 写入文件
-            fileName = SplitUtil.writeFile(JSONObject.toJSONString(datas), hospitalCode + "_" + this.getCdaName().name());
-        }
-        return fileName;
+            return fileName;
+        });
     }
 
     @Override
@@ -98,7 +102,7 @@ public class ${table.serviceName} extends ${superServiceImplClass}<${table.mappe
     @Override
     public String getLastDateTime(String hospitalCode) {
         QueryWrapper<${entity}> wrapper = new QueryWrapper<>();
-        wrapper.select("max(`UPDATED_AT`) as UPDATED_AT")
+        wrapper.select("max(`UPDATED_AT`) as updatedAt")
             .eq("CORG_CODE", hospitalCode);
         ${entity} entityDto = this.baseMapper.selectOne(wrapper);
         String lastDateTime = null;

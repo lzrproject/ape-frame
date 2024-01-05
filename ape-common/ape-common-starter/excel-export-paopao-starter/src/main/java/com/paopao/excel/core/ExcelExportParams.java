@@ -60,7 +60,7 @@ public class ExcelExportParams<Params, ExportBean> {
     private ExcelExportParams(String exportUser, Params params, Class<ExportBean> exportBeanClass,
                               SearchExcelDataService exportServer, CountExcelDataService countService, ExcelFileDesc fileDesc) {
         this.exportUser = exportUser;
-        this.exportCount = exportCount;
+//        this.exportCount = exportCount;
         this.params = params;
         this.exportBeanClass = exportBeanClass;
         this.exportServer = exportServer;
@@ -71,7 +71,7 @@ public class ExcelExportParams<Params, ExportBean> {
     private ExcelExportParams(String exportUser, Params params, Class<ExportBean> exportBeanClass,
                               SearchExcelDataService exportServer, ExcelFileDesc fileDesc, ExportContext context) {
         this.exportUser = exportUser;
-        this.exportCount = exportCount;
+//        this.exportCount = exportCount;
         this.params = params;
         this.exportBeanClass = exportBeanClass;
         this.exportServer = exportServer;

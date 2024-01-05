@@ -85,6 +85,7 @@ public class ExcelExportServer extends ExportServer {
         CountExcelDataService countServer = params.getCountServer();
         if (ObjectUtil.isNotNull(countServer)) {
             Long dataTotal = countServer.count(params);
+            params.setExportCount(dataTotal);
         }
         // 获取文件名
         String fileName = genFileName(excelFileDesc, exportUser);
@@ -110,6 +111,7 @@ public class ExcelExportServer extends ExportServer {
         EXECUTOR_GENERAL.execute(() -> {
             try {
                 log.info("========开始导出文件==========");
+                Long exportCount = params.getExportCount();
                 // 01 生成文件
                 SXSSFWorkbook workbook = buildWorkbook(excelFileDesc.getTitleName(), excelFileDesc.getSheetName(), params.getExportBeanClass(),
                         server, params);
@@ -134,8 +136,8 @@ public class ExcelExportServer extends ExportServer {
      * @param queryParams 查询数据的参数
      */
     private SXSSFWorkbook buildWorkbook(String titleName, String sheetName, Class<?> pojoClass, IExcelExportServer server, Object queryParams) {
-
         ExportParams params = new ExportParams(titleName, sheetName);
+        params.setMaxNum(500000);
         return (SXSSFWorkbook) ExcelExportUtil.exportBigExcel(params, pojoClass, server, queryParams);
     }
 

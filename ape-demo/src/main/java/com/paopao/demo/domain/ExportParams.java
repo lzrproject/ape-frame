@@ -20,14 +20,9 @@ public class ExportParams {
     private String conditionStr;
 
     /**
-     * 根据年份查询(yyyy)
+     * 根据日期查询(yyyy-MM-dd)
      */
-    private String year;
-
-    /**
-     * 根据年份-月份查询(yyyy-MM)
-     */
-    private String yearMonth;
+    private String dateStr;
 
     /**
      * 需要导出总数量

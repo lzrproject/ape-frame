@@ -1,5 +1,6 @@
 package com.paopao.demo.service.impl;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.base.Preconditions;
@@ -26,12 +27,20 @@ public class JhemrCda02ServiceImpl extends ServiceImpl<JhemrCda02Mapper, JhemrCd
     /**
      * 每次分页数量
      */
-    private static final Integer SIZE = 1000;
+    private static final Integer SIZE = 3000;
 
     @Override
+    @DS("TEST")
     public List<JhemrCda02VO> getListByCondition(ExportParams exportParams, Long page) {
         exportParams.getLimit(page, SIZE);
         return this.baseMapper.selectListByCondition(exportParams);
+    }
+
+    @Override
+    @DS("JHEMR")
+    public Integer batchInsertCda02(List<JhemrCda02VO> jhemrCda02VOS) {
+        this.saveBatch(jhemrCda02VOS);
+        return jhemrCda02VOS.size();
     }
 
 

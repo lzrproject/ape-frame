@@ -15,4 +15,6 @@ import java.util.List;
 public interface JhemrCda02Service extends IService<JhemrCda02VO> {
 
     public List<JhemrCda02VO> getListByCondition(ExportParams exportParams, Long page);
+
+    public Integer batchInsertCda02(List<JhemrCda02VO> jhemrCda02VOS);
 }

@@ -124,11 +124,8 @@
         JOIN
         (select JHDL_ROWKEY as tmpId from `jhemr_cda02`
         <where>
-            <if test="year != null and year != ''">
-                and Year(CREATE_TIME) >= #{year}
-            </if>
-            <if test="yearMonth != null and yearMonth != ''">
-                and date_format(CREATE_TIME,'%Y-%m') >= #{yearMonth}
+            <if test="dateStr != null and dateStr != ''">
+                and CREATE_TIME >= #{dateStr}
             </if>
         </where>
         order by CREATE_TIME desc

@@ -1,7 +1,10 @@
 package com.paopao.demo.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.paopao.demo.domain.ExportParams;
 import com.paopao.demo.domain.vo.JhemrCda02VO;
+import com.paopao.demo.importa.core.ExcelImporterService;
+import com.paopao.demo.importa.core.MyDataModelListener;
 import com.paopao.demo.service.ExportService;
 import com.paopao.demo.service.JhemrCda02Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,8 @@ import java.util.List;
 @RequestMapping("excel")
 public class BigExcelController {
 
+
+
     @GetMapping("checkIsReturn")
 //    @CheckExportIsReturn
     public void checkIsReturn() {
@@ -27,6 +32,9 @@ public class BigExcelController {
 
     @Autowired
     private ExportService exportService;
+
+    @Autowired
+    private ExcelImporterService excelImporterService;
 
     @Autowired
     private JhemrCda02Service jhemrCda02Service;
@@ -41,6 +49,17 @@ public class BigExcelController {
     public Long csv() {
         exportService.execBigCsv();
         return 1000L;
+    }
+
+    @GetMapping("importExcel")
+    public void importExcel() {
+        String filePath = "E:\\idea\\demand\\2024\\01\\05\\paopao\\jhemr_cda02_2024_01_05_12_08_22_by_paopao.xlsx";
+
+        EasyExcel.read(filePath, JhemrCda02VO.class, new MyDataModelListener(jhemrCda02Service))
+                .sheet(0) // 指定sheet号
+                .doRead(); // 开始读取操作
+
+//        excelImporterService.doImport();
     }
 
     @PostMapping("test")
