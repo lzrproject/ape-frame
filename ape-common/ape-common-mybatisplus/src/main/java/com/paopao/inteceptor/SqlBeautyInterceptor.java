@@ -20,7 +20,8 @@ import java.util.*;
 @Intercepts(value = {
         @Signature(args = {Statement.class, ResultHandler.class}, method = "query", type = StatementHandler.class),
 //        @Signature(args = {Statement.class}, method = "update", type = StatementHandler.class),
-        @Signature(args = {Statement.class}, method = "batch", type = StatementHandler.class)})
+//        @Signature(args = {Statement.class}, method = "batch", type = StatementHandler.class)
+})
 public class SqlBeautyInterceptor implements Interceptor{
 
 

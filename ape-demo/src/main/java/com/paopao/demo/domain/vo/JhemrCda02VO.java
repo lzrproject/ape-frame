@@ -1,6 +1,8 @@
 package com.paopao.demo.domain.vo;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -17,6 +19,12 @@ import java.util.Date;
 @Data
 public class JhemrCda02VO implements Serializable {
 
+    /**
+     *
+     */
+    @TableId(value = "JHDL_ROWKEY")
+    @ExcelIgnore
+    private Long jhdlRowkey;
 
     /**
      * 主键
@@ -40,18 +48,18 @@ public class JhemrCda02VO implements Serializable {
     private String createPersonCode;
 
     /**
-     * 文档创作者
-     */
-    @TableField(value = "CREATE_PERSON_NAME")
-    @Excel(name = "文档创作者")
-    private String createPersonName;
-
-    /**
      * 文档创作日期时间
      */
     @TableField(value = "CREATE_TIME")
     @Excel(name = "文档创作日期时间")
     private String createTime;
+
+    /**
+     * 文档创作者
+     */
+    @TableField(value = "CREATE_PERSON_NAME")
+    @Excel(name = "文档创作者")
+    private String createPersonName;
 
     /**
      * 门（急）诊号
@@ -400,6 +408,7 @@ public class JhemrCda02VO implements Serializable {
      * 来源库表名,格式为HBase表名格式
      */
     @TableField(value = "JHDL_SRC_TAB")
+    @ExcelIgnore
     private String jhdlSrcTab;
 
 }

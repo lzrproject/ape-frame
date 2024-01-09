@@ -4,6 +4,7 @@ import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.export.ExcelBatchExportService;
 import cn.afterturn.easypoi.handler.inter.IExcelExportServer;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -14,6 +15,7 @@ import com.paopao.excel.core.interfaces.CountExcelDataService;
 import com.paopao.excel.core.interfaces.SearchExcelDataService;
 import com.paopao.excel.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.util.StopWatch;
 
@@ -45,7 +47,8 @@ public class ExcelExportServer extends ExportServer {
 //
     private final ExcelService server;
     private final UploadFileHandler uploadFileHandler;
-//    private final ExcelExportProperties excelExportProperties;
+
+    //    private final ExcelExportProperties excelExportProperties;
 //
     public ExcelExportServer(ExcelService excelService, UploadFileHandler uploadFileHandler,
                              ExcelExportProperties excelExportProperties) {
@@ -138,7 +141,8 @@ public class ExcelExportServer extends ExportServer {
     private SXSSFWorkbook buildWorkbook(String titleName, String sheetName, Class<?> pojoClass, IExcelExportServer server, Object queryParams) {
         ExportParams params = new ExportParams(titleName, sheetName);
         params.setMaxNum(500000);
-        return (SXSSFWorkbook) ExcelExportUtil.exportBigExcel(params, pojoClass, server, queryParams);
+//        return (SXSSFWorkbook) ExcelExportUtil.exportBigExcel(params, pojoClass, server, queryParams);
+        return (SXSSFWorkbook) this.exportBigExcel(params, pojoClass, server, queryParams);
     }
 
     /**
@@ -149,5 +153,12 @@ public class ExcelExportServer extends ExportServer {
         String path = uploadFileHandler.uploadWordBook(workbook, fileName, super.excelExportProperties.getTargetPath(), category, optUser);
 //        excelExportHandler.updateTaskPath(taskId, path, getContext(taskId));
 
+    }
+
+    public static Workbook exportBigExcel(ExportParams entity, Class<?> pojoClass,
+                                          IExcelExportServer server, Object queryParams) {
+        ExcelBatchExportServer batchServer = new ExcelBatchExportServer();
+        batchServer.init(entity, pojoClass);
+        return batchServer.exportBigExcel(server, queryParams);
     }
 }

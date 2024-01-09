@@ -1,5 +1,7 @@
 package com.paopao.demo.importa.core;
 
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.paopao.demo.domain.MyDataModel;
@@ -9,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 描述
@@ -20,22 +23,28 @@ import java.util.List;
 public class MyDataModelListener implements ReadListener<JhemrCda02VO> {
 
     private JhemrCda02Service jhemrCda02Service;
+    private Snowflake snowflake;
+    private AtomicLong currentRowNum;
 
     // 设置批量处理的数据大小
-    private static final int BATCH_SIZE = 1000;
+    private static final int BATCH_SIZE = 3000;
     // 用于暂存读取的数据，直到达到批量大小
     private ThreadLocal<List<JhemrCda02VO>> batch = ThreadLocal.withInitial(ArrayList::new);
 
     // 构造函数，注入MyBatis的Mapper
-    public MyDataModelListener(JhemrCda02Service jhemrCda02Service) {
+    public MyDataModelListener(JhemrCda02Service jhemrCda02Service, Snowflake snowflake, AtomicLong currentRowNum) {
         this.jhemrCda02Service = jhemrCda02Service;
+        this.snowflake = snowflake;
+        this.currentRowNum = currentRowNum;
     }
 
     @Override
     public void invoke(JhemrCda02VO jhemrCda02VO, AnalysisContext analysisContext) {
+
         List<JhemrCda02VO> jhemrCda02VOS = batch.get();
         //检查数据的合法性及有效性
         if (validateData(jhemrCda02VO)) {
+            jhemrCda02VO.setJhdlRowkey(snowflake.nextId());
             //有效数据添加到list中
             jhemrCda02VOS.add(jhemrCda02VO);
         } else {
@@ -66,7 +75,6 @@ public class MyDataModelListener implements ReadListener<JhemrCda02VO> {
         List<JhemrCda02VO> jhemrCda02VOS = batch.get();
         // 如果还有未处理的数据，进行处理
         if (!jhemrCda02VOS.isEmpty()) {
-            log.info("MyDataModelListener.doAfterAllAnalysed size:{}", jhemrCda02VOS.size());
             processBatch();
         }
     }
@@ -80,6 +88,7 @@ public class MyDataModelListener implements ReadListener<JhemrCda02VO> {
             try {
                 // 尝试批量插入
                 jhemrCda02Service.batchInsertCda02(jhemrCda02VOS);
+                log.info("MyDataModelListener invoke size:{}", currentRowNum.addAndGet(jhemrCda02VOS.size()));
                 // 清空批量数据，以便下一次批量处理
                 jhemrCda02VOS.clear();
                 break;

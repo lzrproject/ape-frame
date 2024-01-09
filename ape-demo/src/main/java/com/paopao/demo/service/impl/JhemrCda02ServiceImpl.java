@@ -12,6 +12,7 @@ import com.paopao.demo.mapper.JhemrCda02Mapper;
 import com.paopao.request.PageRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class JhemrCda02ServiceImpl extends ServiceImpl<JhemrCda02Mapper, JhemrCd
 
     @Override
     @DS("JHEMR")
+    @Transactional(rollbackFor = Exception.class)
     public Integer batchInsertCda02(List<JhemrCda02VO> jhemrCda02VOS) {
         this.saveBatch(jhemrCda02VOS);
         return jhemrCda02VOS.size();

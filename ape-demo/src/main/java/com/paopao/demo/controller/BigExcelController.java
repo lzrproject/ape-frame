@@ -1,5 +1,7 @@
 package com.paopao.demo.controller;
 
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 import com.alibaba.excel.EasyExcel;
 import com.paopao.demo.domain.ExportParams;
 import com.paopao.demo.domain.vo.JhemrCda02VO;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 模块描述
@@ -50,16 +53,16 @@ public class BigExcelController {
         exportService.execBigCsv();
         return 1000L;
     }
-
+    private Snowflake snowflake = IdUtil.getSnowflake(1, 1);
     @GetMapping("importExcel")
     public void importExcel() {
         String filePath = "E:\\idea\\demand\\2024\\01\\05\\paopao\\jhemr_cda02_2024_01_05_12_08_22_by_paopao.xlsx";
-
-        EasyExcel.read(filePath, JhemrCda02VO.class, new MyDataModelListener(jhemrCda02Service))
-                .sheet(0) // 指定sheet号
-                .doRead(); // 开始读取操作
-
-//        excelImporterService.doImport();
+        AtomicLong aLong = new AtomicLong();
+        excelImporterService.doImport();
+//        EasyExcel.read(filePath, JhemrCda02VO.class, new MyDataModelListener(jhemrCda02Service, snowflake, aLong))
+//                .sheet(0) // 指定sheet号
+//                .headRowNumber(2)
+//                .doRead(); // 开始读取操作
     }
 
     @PostMapping("test")

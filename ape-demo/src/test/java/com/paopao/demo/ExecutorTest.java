@@ -3,6 +3,8 @@ package com.paopao.demo;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.IdUtil;
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import com.paopao.demo.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 /**
  * 描述
@@ -25,7 +29,7 @@ import java.util.concurrent.*;
 @Slf4j
 public class ExecutorTest {
 
-    private ThreadPoolExecutor thread = new ThreadPoolExecutor(4, 8, 50, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100), new ThreadPoolExecutor.DiscardPolicy());
+    private ThreadPoolExecutor thread = new ThreadPoolExecutor(10, 10, 50, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100), new ThreadPoolExecutor.DiscardPolicy());
 
     private ThreadLocal<List<Integer>> threadLocal = ThreadLocal.withInitial(ArrayList::new);
 
@@ -110,5 +114,54 @@ public class ExecutorTest {
 
     private void saveData(List<Integer> instanceIds) {
         System.out.println(instanceIds);
+    }
+
+    @Test
+    public void semaphore() {
+        Semaphore semaphore = new Semaphore(5);
+        List<CompletableFuture<Void>> futures = new ArrayList<>();
+        AtomicLong aLong = new AtomicLong();
+        for (int i = 0; i < 10; i++) {
+            int finalI = i;
+            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+                throw new RuntimeException("111");
+//                try {
+//                    semaphore.acquire();
+//                    System.out.println(aLong.addAndGet(1000));
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                System.out.println(finalI);
+//                try {
+//                    Thread.sleep(5000L);
+//                    semaphore.release();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+            }, thread);
+            futures.add(future);
+        }
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+        System.out.println(aLong.get());
+    }
+
+
+    @Test
+    public void functionTest(){
+        List<User> list = new ArrayList<>();
+        User user = new User();
+        user.setUserid(111L);
+        User user1 = new User();
+        user1.setUserid(222L);
+        list.add(user);
+        list.add(user1);
+        aa(list, User::getUserid);
+    }
+
+    private <T, R> void aa(List<T> list, SFunction<T, R> function) {
+//        R apply = function.apply(data);
+//        System.out.println(apply);
+        List<R> rList = list.stream().map(function).collect(Collectors.toList());
+        System.out.println(rList);
     }
 }
