@@ -19,11 +19,12 @@ import org.junit.Test;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- * 模块描述
+ * 顺序消费
  *
  * @Author paoPao
  * @Date 2024/1/16
@@ -57,10 +58,16 @@ public class OrderMQTest {
             String str = scanner.nextLine();
             String[] strArr = str.split("\\^");
             OrderInfo orderInfo = new OrderInfo();
-            String id = "ABCD123" + strArr[0];
-            orderInfo.setOrderId(id);
-            orderInfo.setOrderName(strArr[1]);
-            orderInfo.setOrderPrice(strArr[2]);
+            String id = null;
+            try {
+                id = "ABCD123" + strArr[0];
+                orderInfo.setOrderId(id);
+                orderInfo.setOrderName(strArr[1]);
+                orderInfo.setOrderPrice(strArr[2]);
+            }catch (Exception e) {
+                System.out.println("报错:" + e);
+                continue;
+            }
             Message message = new Message("order_topic", JSON.toJSONString(orderInfo).getBytes(StandardCharsets.UTF_8));
             producer.send(message, new MessageQueueSelector() {
                 @Override
@@ -94,6 +101,7 @@ public class OrderMQTest {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("MQProduct-Group3");
         consumer.setNamesrvAddr(NAME_SRV_ADDR);
         consumer.subscribe("order_topic", "*");
+        consumer.setMaxReconsumeTimes(5);
         consumer.registerMessageListener(new MessageListenerOrderly() {
             @Override
             public ConsumeOrderlyStatus consumeMessage(List<MessageExt> list, ConsumeOrderlyContext consumeOrderlyContext) {
@@ -104,6 +112,7 @@ public class OrderMQTest {
                 }else {
                     System.out.println("消费消息:" + message);
                 }
+                System.out.println("消费消息:" + message);
                 return ConsumeOrderlyStatus.SUCCESS;
             }
         });
@@ -111,6 +120,7 @@ public class OrderMQTest {
         System.in.read();
         consumer.shutdown();
     }
+
 }
 
 @Data

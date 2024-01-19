@@ -34,6 +34,18 @@ spring:
           password: 123456
           type: com.alibaba.druid.pool.DruidDataSource
 
+
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    # 生成组别
+    group: boot-group
+    # 消息发送超时时间
+    send-message-timeout: 3000
+    retry-times-when-send-async-failed: 2
+    max-message-size: 4194304
+
+
 #mybatis-plus:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
