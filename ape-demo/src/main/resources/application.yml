@@ -1,3 +1,5 @@
+server:
+  port: 8113
 spring:
   application:
     name: ape-demo
@@ -40,10 +42,10 @@ rocketmq:
   producer:
     # 生成组别
     group: boot-group
-    # 消息发送超时时间
-    send-message-timeout: 3000
-    retry-times-when-send-async-failed: 2
-    max-message-size: 4194304
+#    # 消息发送超时时间
+#    send-message-timeout: 3000
+#    retry-times-when-send-async-failed: 2
+#    max-message-size: 4194304
 
 
 #mybatis-plus:
