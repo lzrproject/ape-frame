@@ -17,6 +17,7 @@
         <module>ape-code-generator</module>
         <module>ape-dependencies</module>
         <module>ape-demo</module>
+        <module>ape-cda-generator</module>
     </modules>
 
 <!--    <parent>-->

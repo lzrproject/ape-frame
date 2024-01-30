@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.paopao.cda.mapper.DynamicMapper">
+
+
+    <resultMap id="conditionMap" type="com.paopao.cda.domain.ResponseData">
+        <result property="field1" column="field1" />
+        <result property="field2" column="field2" />
+    </resultMap>
+    <select id="selectByCondition" resultMap="conditionMap">
+        ${sqlStr}
+    </select>
+</mapper>
