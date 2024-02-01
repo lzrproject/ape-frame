@@ -1,6 +1,7 @@
 package com.paopao.cda.utils;
 
 import cn.hutool.core.util.StrUtil;
+import com.paopao.cda.domain.Dict;
 import com.paopao.cda.domain.HdrDictItem;
 import com.paopao.cda.domain.OperationData;
 import com.paopao.cda.domain.SimilarParam;
@@ -33,7 +34,7 @@ public class SimilarUtil<T> {
 
     public SimilarUtil(List<T> itemList, Class<T> clazz) {
         try {
-            this.flag = clazz.newInstance() instanceof HdrDictItem;
+            this.flag = clazz.newInstance() instanceof Dict;
         } catch (Exception e) {
             log.error("similarByCosine error", e);
         }
@@ -48,7 +49,7 @@ public class SimilarUtil<T> {
         simList = new ArrayList<>(itemList.size());
         itemList.forEach(v -> {
             if (flag) {
-                HdrDictItem data = (HdrDictItem) v;
+                Dict data = (Dict) v;
                 SimilarParam<T> param1 = new SimilarParam<>();
                 // itemValue
                 Map<CharSequence, Integer> map1 = Arrays.stream(data.getItemValue().split(""))
@@ -83,7 +84,7 @@ public class SimilarUtil<T> {
         // 计算相似度
         simList.forEach(v -> {
             if (flag) {
-                HdrDictItem data = (HdrDictItem) v.getItem();
+                Dict data = (Dict) v.getItem();
                 Double similar = similarity.cosineSimilarity(map1, v.getSimilarVal());
                 if (simHashMap.containsKey(data.getItemCode() + "^" + data.getItemValue())) {
                     Double tmp = simHashMap.get(data.getItemCode() + "^" + data.getItemValue());

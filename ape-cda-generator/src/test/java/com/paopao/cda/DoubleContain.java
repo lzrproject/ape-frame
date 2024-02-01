@@ -33,20 +33,14 @@ public class DoubleContain {
     @Test
     public void test() {
         String[] a = {
-                "辐照去白细胞悬浮红细胞",
-                "辐照洗涤红细胞(盐水)",
-                "辐照单采血小板",
-                "辐照洗涤红细胞(MAP)",
-                "洗涤红细胞(盐水)",
-                "冷沉淀凝血因子",
-                "新冠康复者血浆",
-                "病毒灭活新鲜冰冻血浆",
-                "单采血小板",
-                "去白细胞悬浮红细胞",
-                "洗涤红细胞(MAP)"
+                "普食  ",
+                "全流食  ",
+                "禁食  ",
+                "治疗饮食",
+                "半流食  "
         };
         QueryWrapper<CdaDictItemLyd> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("DICT_CODE", "CV04.50.021");
+        queryWrapper.eq("DICT_CODE", "CV06.00.224");
         List<CdaDictItemLyd> list = cdaDictItemLydService.list(queryWrapper);
         List<String> noMatch = getNoMatch(list, a);
         System.out.println(this.getSimilar(list, noMatch));
@@ -83,13 +77,13 @@ public class DoubleContain {
     @Test
     public void add() {
         String fileName = "E:\\idea\\gitInfo\\compInfo\\company\\业务资料\\CDA交互服务\\op.txt";
-        String dictCode = "CV04.50.021";
+        String dictCode = "CV05.10.021";
         List<String> strList = FileUtilCommon.readFile(fileName);
         List<CdaDictItemLyd> cdaDictItemLyds = new ArrayList<>();
         for (int i = 0; i < strList.size(); i++) {
             CdaDictItemLyd extracted = this.extracted(dictCode, strList, i);
             if (extracted != null) {
-                extracted.setPk(dictCode + "|" + (45 + i));
+                extracted.setPk(dictCode + "|" + (12 + i));
                 cdaDictItemLyds.add(extracted);
             }
 
