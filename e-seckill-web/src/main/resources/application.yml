@@ -1,8 +1,9 @@
 server:
-  port: 8113
+  port: 8283
+  tomcat:
+    threads:
+      max: 400
 spring:
-  application:
-    name: ape-demo
   datasource:
     dynamic:
       druid:
@@ -36,38 +37,13 @@ spring:
           password: 123456
           type: com.alibaba.druid.pool.DruidDataSource
   redis:
-    host: localhost
+    host: 127.0.0.1
     port: 6379
     database: 0
-    lettuce:
-      pool:
-        max-active: 20
-        max-idle: 8   # 空闲连接数
-        max-wait: -1
-        min-idle: 0
-  autoconfigure:
-    exclude: org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration
-
-
 rocketmq:
-#  name-server: 127.0.0.1:9876
-  producer:
+  name-server: 127.0.0.1:9876
+#  producer:
     # 生成组别
-    group: boot-group
-#    # 消息发送超时时间
-#    send-message-timeout: 3000
-#    retry-times-when-send-async-failed: 2
-#    max-message-size: 4194304
-
-
-#mybatis-plus:
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-paopao:
-  export:
-    excel:
-      targetPath: E:\idea\demand
-      maxExportCount: 10000
-guava:
-  cache:
-    switch: false
+#    group: boot-group
+#    access-key:
+#    secret-key:

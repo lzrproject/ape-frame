@@ -18,6 +18,7 @@
         <module>ape-dependencies</module>
         <module>ape-demo</module>
         <module>ape-cda-generator</module>
+        <module>e-seckill-web</module>
     </modules>
 
 <!--    <parent>-->

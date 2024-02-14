@@ -54,4 +54,5 @@ public class BitTest {
         System.out.println(filter.mightContain("hello1"));
         System.out.println(filter.mightContain("hello4"));
     }
+
 }

@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("mq")
 public class MqController {
 
-    @Autowired
+    @Autowired(required = false)
     private RocketMQTemplate rocketMQTemplate;
 
     @RequestMapping("orderTest")
